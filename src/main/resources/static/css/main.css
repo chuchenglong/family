@@ -1,0 +1,15 @@
+body {
+    padding-top: 70px;
+}
+
+.core-area {
+    width:auto;
+    position:fixed;
+}
+
+.left {
+    left:15px;
+}
+.right {
+    right:15px;
+}

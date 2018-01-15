@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="show account add.">
+    <meta name="author" content="chuchenglong">
+    <title>Family</title>
+    <link href="../../image/nav/mark.jpg" rel="icon">
+    <link href="../../libs/bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet"><!-- Bootstrap core CSS -->
+    <link href="../../libs/bootstrap-table/dist/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../../css/account.css" rel="stylesheet"><!-- Custom styles for this template -->
+    <script type="text/javascript" src="../../libs/jquery/jquery.js"></script>
+    <script type="text/javascript" src="../../libs/jquery/jquery.easing.min.js"></script>
+    <script type="text/javascript" src="../../libs/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../libs/bootstrap-table/dist/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="../../libs/bootstrap-table/dist/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script type="text/javascript" src="../../libs/mc/mc-constant.js"></script>
+    <script type="text/javascript" src="../../libs/mc/mc-ajax.js"></script>
+    <script type="text/javascript" src="../../libs/mc/mc-window.js"></script>
+    <script type="text/javascript" src="../../libs/mc/mc-alert.js"></script>
+    <script type="text/javascript" src="../../libs/mc/mc-table.js"></script>
+    <script type="text/javascript" src="../../js/account/accountAdd.html.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="form-register">
+        <h3 class="form-register-heading">Please input your message</h3>
+        <table>
+            <tr>
+                <td><label for="username">Username : </label></td>
+                <td><input id="username" type="text" class="form-control" placeholder="Username"></td>
+            </tr>
+            <tr>
+                <td><label for="email">Email : </label></td>
+                <td><input id="email" type="text" class="form-control" placeholder="Email"></td>
+            </tr>
+            <tr>
+                <td><label for="phone">Phone : </label></td>
+                <td><input id="phone" type="text" class="form-control" placeholder="Phone"></td>
+            </tr>
+            <tr>
+                <td><label for="realName">Real name : </label></td>
+                <td><input id="realName" type="text" class="form-control" placeholder="realName"></td>
+            </tr>
+            <tr>
+                <td><label for="alias">Alias : </label></td>
+                <td><input id="alias" type="text" class="form-control" placeholder="alias"></td>
+            </tr>
+            <tr>
+                <td><label for="male">Gender : </label></td>
+                <td>
+                    <input type="radio" id="male" name="gender" value="male" checked="checked"> <label>Male</label>
+                    <input type="radio" id="female" name="gender" value="female"> <label>Female</label>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="loginPassword">Login password : </label></td>
+                <td><input id="loginPassword" type="password" class="form-control" placeholder="Login Password"></td>
+            </tr>
+            <tr>
+                <td><label for="dealPassword">Deal password : </label></td>
+                <td><input id="dealPassword" type="password" class="form-control" placeholder="Deal Password"></td>
+            </tr>
+        </table>
+
+        <div class="center">
+            <button id="submit" type="submit" class="btn btn-primary rigth" onclick="submit()">Submit</button>
+            <button id="reset" type="reset" class="btn btn-default rigth" onclick="reset()">Reset</button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mc.family.mapper.UserInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.mc.family.model.UserInfo" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="role_id" property="roleId" jdbcType="INTEGER" />
+    <result column="login_password" property="loginPassword" jdbcType="VARCHAR" />
+    <result column="deal_password" property="dealPassword" jdbcType="VARCHAR" />
+    <result column="real_name" property="realName" jdbcType="VARCHAR" />
+    <result column="alias" property="alias" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="VARCHAR" />
+    <result column="photo" property="photo" jdbcType="VARCHAR" />
+    <result column="brief" property="brief" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="last_modify_time" property="lastModifyTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_user_info
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mc.family.model.UserInfo" >
+    <selectKey resultType="java.lang.Integer" keyProperty="userId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_user_info (username, email, phone, 
+      role_id, login_password, deal_password, 
+      real_name, alias, gender, 
+      photo, brief, create_time, 
+      last_modify_time)
+    values (#{username,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{roleId,jdbcType=INTEGER}, #{loginPassword,jdbcType=VARCHAR}, #{dealPassword,jdbcType=VARCHAR}, 
+      #{realName,jdbcType=VARCHAR}, #{alias,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, 
+      #{photo,jdbcType=VARCHAR}, #{brief,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{lastModifyTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.mc.family.model.UserInfo" >
+    update t_user_info
+    set username = #{username,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      role_id = #{roleId,jdbcType=INTEGER},
+      login_password = #{loginPassword,jdbcType=VARCHAR},
+      deal_password = #{dealPassword,jdbcType=VARCHAR},
+      real_name = #{realName,jdbcType=VARCHAR},
+      alias = #{alias,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=VARCHAR},
+      photo = #{photo,jdbcType=VARCHAR},
+      brief = #{brief,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select user_id, username, email, phone, role_id, login_password, deal_password, real_name, 
+    alias, gender, photo, brief, create_time, last_modify_time
+    from t_user_info
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select user_id, username, email, phone, role_id, login_password, deal_password, real_name, 
+    alias, gender, photo, brief, create_time, last_modify_time
+    from t_user_info
+  </select>
+
+  <select id="selectUserByContent" resultMap="BaseResultMap">
+  select user_id, username, email, phone, role_id, login_password, deal_password, real_name,
+    alias, gender, photo, brief, create_time, last_modify_time
+  from t_user_info
+  where 1=1 and (1=0
+  <if test="username != null and username != '' ">
+    or username = #{username}
+  </if>
+  <if test="email != null and email != '' ">
+    or email = #{email}
+  </if>
+  <if test="phone != null and phone != '' ">
+    or phone = #{phone}
+  </if>
+  )
+  </select>
+</mapper>

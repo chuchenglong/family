@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="core page of the family system.">
+    <meta name="author" content="chuchenglong">
+    <title>Family</title>
+    <link href="../css/core.css" rel="stylesheet">
+    <script type="text/javascript" src="../js/common/family-load.js"></script>
+    <script type="text/javascript" src="../js/core.html.js"></script>
+</head>
+
+<body>
+<!-- head model, fixed navigation -->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Family Project</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="core.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">日常管理<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a id="menuAccountAdd" href="javascript:void(0)" onclick="turnAccountAdd()">日常账户新增</a></li>
+                        <li><a id="menuAccountList" href="javascript:void(0)" onclick="turnAccountList()">日常账户列表</a></li>
+                    </ul>
+                </li>
+                <li><a href="#contact">Contact</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li class="dropdown-header">Nav header</li>
+                        <li><a href="#">Separated link</a></li>
+                        <li><a href="#">One more separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="fix-weight-center-img"><img class="fix-img-nav" src="../image/nav/mark.png"></li>
+                <li class="fix-weight-left"><a href="#">储筱然/宝宝是最高领导</a></li>
+                <li class="active fix-weight-center"><a href="#">退出系统<span class="sr-only">(current)</span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- core model -->
+<div class="container-fluid">
+    <div class="embed-responsive embed-responsive-16by9">
+        <iframe id="content" class="embed-responsive-item" src="main/main.html"></iframe>
+    </div>
+</div>
+
+<!-- foot model -->
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted" style="text-align: center">Copy right | @2017 - 2117 | Create by chuchenglong.  All rights reserved.</p>
+    </div>
+</footer>
+
+</body>
+</html>
