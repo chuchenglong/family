@@ -20,4 +20,8 @@ public class AccountService {
     public List<AccountInfo> queryAccountListWithPage() {
         return accountInfoMapper.selectAll();
     }
+
+    public void addAccount(AccountInfo accountInfo) {
+        accountInfoMapper.insert(accountInfo);
+    }
 }

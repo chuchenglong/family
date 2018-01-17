@@ -1,8 +1,5 @@
 package com.mc.family.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import com.mc.family.config.ConstantComm;
-import com.mc.family.config.ManagerResult;
 import com.mc.family.model.AccountInfo;
 import com.mc.family.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +25,21 @@ import java.util.Map;
 public class AccountController extends BaseController {
     @Autowired
     private AccountService accountService;
+
+    /**
+     * @description 账户新增服务接口
+     * @param request 请求参数
+     * @param response 返回参数
+     * @throws java.lang.Exception
+     * @author ChenglongChu
+     * @create 2018/1/17 17:00
+     **/
+    @RequestMapping(value="/insert", method = RequestMethod.POST)
+    public void addAccount(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        AccountInfo accountInfo = input(request, AccountInfo.class);
+        accountService.addAccount(accountInfo);
+        output(response, null);
+    }
 
     /**
      * @description 账户列表查询接口
