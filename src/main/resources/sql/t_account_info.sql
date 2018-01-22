@@ -8,7 +8,7 @@ create table t_account_info(
   ref_account_id int(10) comment '关联账户',
   phone varchar(20) comment '绑定手机号',
   email varchar(50) comment '绑定邮箱',
-  propuse varchar(50) comment '用途',
+  purpose varchar(50) comment '用途',
   description varchar(300) comment '描述',
   creator varchar(50) comment '创建人',
   create_time timestamp comment '创建时间',

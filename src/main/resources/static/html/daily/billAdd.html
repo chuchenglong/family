@@ -11,7 +11,7 @@
     <link href="../../image/nav/mark.jpg" rel="icon">
     <link href="../../libs/bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet"><!-- Bootstrap core CSS -->
     <link href="../../libs/bootstrap-table/dist/bootstrap-table.min.css" rel="stylesheet">
-    <link href="../../css/account.css" rel="stylesheet"><!-- Custom styles for this template -->
+    <link href="../../css/daily.css" rel="stylesheet"><!-- Custom styles for this template -->
     <script type="text/javascript" src="../../libs/jquery/jquery.js"></script>
     <script type="text/javascript" src="../../libs/jquery/jquery.easing.min.js"></script>
     <script type="text/javascript" src="../../libs/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
@@ -22,38 +22,30 @@
     <script type="text/javascript" src="../../libs/mc/mc-window.js"></script>
     <script type="text/javascript" src="../../libs/mc/mc-alert.js"></script>
     <script type="text/javascript" src="../../libs/mc/mc-table.js"></script>
-    <script type="text/javascript" src="../../js/account/accountAdd.html.js"></script>
+    <script type="text/javascript" src="../../js/daily/billAdd.html.js"></script>
 </head>
 
 <body>
 
 <div class="container">
-    <div class="form-register">
-        <h3 class="form-register-heading">新增账户</h3>
+    <div class="form-body-center">
+        <h3 class="form-body-heading">新增账单</h3>
         <table>
             <tr>
-                <td><label for="accountNo">账户 : </label></td>
-                <td><input id="accountNo" type="text" class="form-control" placeholder="请输入账户"></td>
+                <td><label for="accountNo">添加日期 : </label></td>
+                <td><input id="accountNo" type="text" class="form-control" placeholder="请输入日期"></td>
             </tr>
             <tr>
-                <td><label for="accountName">户名 : </label></td>
-                <td><input id="accountName" type="text" class="form-control" placeholder="请输入户名"></td>
+                <td><label for="accountName">消费内容 : </label></td>
+                <td><input id="accountName" type="text" class="form-control" placeholder="请输入消费内容"></td>
             </tr>
             <tr>
-                <td><label for="refAccountId">关联账户 : </label></td>
-                <td><input id="refAccountId" type="text" class="form-control" placeholder="refAccountId"></td>
+                <td><label for="refAccountId">花费金额 : </label></td>
+                <td><input id="refAccountId" type="text" class="form-control" placeholder="请输入花费金额"></td>
             </tr>
             <tr>
-                <td><label for="phone">绑定手机号 : </label></td>
-                <td><input id="phone" type="text" class="form-control" placeholder="请输入绑定手机号"></td>
-            </tr>
-            <tr>
-                <td><label for="email">绑定邮箱 : </label></td>
-                <td><input id="email" type="text" class="form-control" placeholder="请输入绑定邮箱"></td>
-            </tr>
-            <tr>
-                <td><label for="propuse">用途 : </label></td>
-                <td><input id="propuse" type="text" class="form-control" placeholder="请输入用途"></td>
+                <td><label for="phone">出/入账 : </label></td>
+                <td><input id="phone" type="text" class="form-control" placeholder="请输入出/入账"></td>
             </tr>
             <tr>
                 <td><label for="description">描述 : </label></td>

@@ -2,6 +2,7 @@ package com.mc.family.service;
 
 import com.mc.family.mapper.AccountInfoMapper;
 import com.mc.family.model.AccountInfo;
+import com.mc.family.vo.PageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +18,13 @@ import java.util.List;
 public class AccountService {
     @Autowired
     private AccountInfoMapper accountInfoMapper;
-    public List<AccountInfo> queryAccountListWithPage() {
-        return accountInfoMapper.selectAll();
+    public PageVo queryAccountListPageByUserId(AccountInfo accountInfo) {
+        PageVo pageVo = new PageVo();
+        List<AccountInfo> list =  accountInfoMapper.selectAccountListPageByUserId(accountInfo);
+        int total = accountInfoMapper.selectAccountListPageCountByUserId(accountInfo);
+        pageVo.setTotal(total);
+        pageVo.setRows(list);
+        return pageVo;
     }
 
     public void addAccount(AccountInfo accountInfo) {

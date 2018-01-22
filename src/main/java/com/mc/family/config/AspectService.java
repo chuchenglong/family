@@ -30,8 +30,8 @@ public class AspectService {
     **/
     @Before("serviceAspect()")
     public void before(JoinPoint joinPoint) {
-//        String methodName = joinPoint.getSignature().getName();
-//        System.out.println("service " + methodName + " start----------");
+        String methodName = joinPoint.getSignature().getName();
+        System.out.println("service " + methodName + " start----------");
     }
 
     /**
@@ -42,8 +42,8 @@ public class AspectService {
     **/
     @After("serviceAspect()")
     public void after(JoinPoint joinPoint) {
-//        String methodName = joinPoint.getSignature().getName();
-//        System.out.println("service " + methodName + " end----------");
+        String methodName = joinPoint.getSignature().getName();
+        System.out.println("service " + methodName + " end----------");
     }
 
     /**

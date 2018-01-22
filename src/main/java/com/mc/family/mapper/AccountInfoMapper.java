@@ -13,4 +13,8 @@ public interface AccountInfoMapper {
     List<AccountInfo> selectAll();
 
     int updateByPrimaryKey(AccountInfo record);
+
+    List<AccountInfo> selectAccountListPageByUserId(AccountInfo accountInfo);
+
+    int selectAccountListPageCountByUserId(AccountInfo accountInfo);
 }

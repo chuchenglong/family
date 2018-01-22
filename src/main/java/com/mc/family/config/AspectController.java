@@ -34,8 +34,8 @@ public class AspectController {
     **/
     @Before("controllerAspect()")
     public void before(JoinPoint joinPoint) {
-//        String methodName = joinPoint.getSignature().getName();
-//        System.out.println("controller " + methodName + " start----------");
+        String methodName = joinPoint.getSignature().getName();
+        System.out.println("controller " + methodName + " start----------");
     }
 
     /**
@@ -50,6 +50,7 @@ public class AspectController {
         try {
             pjp.proceed();
         } catch (Throwable ex) {
+            ManagerLog.error(ex, "Controller AOP异常捕获统一处理, 打印错误内容 : ", ex.getMessage());
             // 统一处理异常
             Object[] objects = pjp.getArgs();
             HttpServletResponse response = (HttpServletResponse)objects[1];
@@ -71,8 +72,8 @@ public class AspectController {
      **/
     @After("controllerAspect()")
     public void after(JoinPoint joinPoint) {
-//        String methodName = joinPoint.getSignature().getName();
-//        System.out.println("controller " + methodName + " end----------");
+        String methodName = joinPoint.getSignature().getName();
+        System.out.println("controller " + methodName + " end----------");
     }
 
     /**

@@ -9,7 +9,7 @@
     <result column="ref_account_id" property="refAccountId" jdbcType="INTEGER" />
     <result column="phone" property="phone" jdbcType="VARCHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
-    <result column="propuse" property="propuse" jdbcType="VARCHAR" />
+    <result column="purpose" property="purpose" jdbcType="VARCHAR" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="creator" property="creator" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -26,12 +26,12 @@
     </selectKey>
     insert into t_account_info (user_id, account_no, account_name, 
       ref_account_id, phone, email, 
-      propuse, description, creator, 
+      purpose, description, creator, 
       create_time, updater, last_modify_time
       )
     values (#{userId,jdbcType=INTEGER}, #{accountNo,jdbcType=VARCHAR}, #{accountName,jdbcType=VARCHAR}, 
       #{refAccountId,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{propuse,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, 
+      #{purpose,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR}, #{lastModifyTime,jdbcType=TIMESTAMP}
       )
   </insert>
@@ -43,7 +43,7 @@
       ref_account_id = #{refAccountId,jdbcType=INTEGER},
       phone = #{phone,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
-      propuse = #{propuse,jdbcType=VARCHAR},
+      purpose = #{purpose,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
       creator = #{creator,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -53,13 +53,26 @@
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select account_id, user_id, account_no, account_name, ref_account_id, phone, email, 
-    propuse, description, creator, create_time, updater, last_modify_time
+    purpose, description, creator, create_time, updater, last_modify_time
     from t_account_info
     where account_id = #{accountId,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
     select account_id, user_id, account_no, account_name, ref_account_id, phone, email, 
-    propuse, description, creator, create_time, updater, last_modify_time
+    purpose, description, creator, create_time, updater, last_modify_time
     from t_account_info
   </select>
+
+  <select id="selectAccountListPageByUserId" parameterType="com.mc.family.model.AccountInfo" resultMap="BaseResultMap" >
+    select account_id, user_id, account_no, account_name, ref_account_id, phone, email,
+    purpose, description, creator, create_time, updater, last_modify_time
+    from t_account_info limit 0, 10
+  </select>
+
+  <select id="selectAccountListPageCountByUserId" parameterType="com.mc.family.model.AccountInfo" resultType="java.lang.Integer" >
+    select count(1) from t_account_info
+  </select>
+
+
+
 </mapper>

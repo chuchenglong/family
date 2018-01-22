@@ -90,9 +90,8 @@ $mc_t.init_page_table = function(tableId, columns, url, params, pageSize, pageLi
         params = {};
     }
     params.pageSize = pageSize;
-    params.offset = pageSize * (params.pageNumber-1) + 1;
-    params.startPoint = pageSize * (params.pageNumber-1);
-    params.endPoint = pageSize * (params.pageNumber);
+
+    console.log(params);
 
     $('#' + tableId).bootstrapTable({
         columns: columns,                      // 列表中表头

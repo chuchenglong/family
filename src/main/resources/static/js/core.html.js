@@ -12,8 +12,14 @@ $(function() {
 });
 
 function turnAccountList() {
-    $("#content").attr('src','account/accountList.html');
+    $("#content").attr('src','daily/accountList.html');
 }
 function turnAccountAdd() {
-    $("#content").attr('src','account/accountAdd.html');
+    $("#content").attr('src','daily/accountAdd.html');
+}
+function turnBillList() {
+    $("#content").attr('src','daily/billList.html');
+}
+function turnBillAdd() {
+    $("#content").attr('src','daily/billAdd.html');
 }

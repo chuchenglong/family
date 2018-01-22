@@ -1,19 +1,13 @@
 $(function () {
+
     var columns = [
         //{checkbox: true},
-        {field: 'userId', title: '用户ID'},
         {field: 'accountNo', title: '账户'},
-        {field: 'accountName', title: '账户名称'},
+        {field: 'accountName', title: '户名'},
         {field: 'phone', title: '手机号'},
-        {field: 'creator', title: '创建人'},
-        {field: 'updater',title: '修改人'}
-    ];
-
-    var columns2 = [
-        //{checkbox: true},
-        {field: 'aaa', title: 'AAA'},
-        {field: 'bbb', title: 'BBB'},
-        {field: 'ccc', title: 'CCC'},
+        {field: 'email', title: '邮箱'},
+        {field: 'purpose', title: '用途'},
+        {field: 'description', title: '描述'},
         {field: 'operation', title: '操作', width:120,
             formatter: function(value, row, index) {
             return [
@@ -34,7 +28,7 @@ $(function () {
     var pageSize = 5;
     var pageList = [5,10,'All'];
     //1.初始化Table
-    $mc_t.init_page_table("tb_departments", columns2, "/account/aaa");
+    $mc_t.init_page_table("tb_departments", columns, "/account/listPage");
 
 });
 

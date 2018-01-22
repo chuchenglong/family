@@ -17,7 +17,7 @@ public class AccountInfo {
 
     private String email;
 
-    private String propuse;
+    private String purpose;
 
     private String description;
 
@@ -85,12 +85,12 @@ public class AccountInfo {
         this.email = email;
     }
 
-    public String getPropuse() {
-        return propuse;
+    public String getPurpose() {
+        return purpose;
     }
 
-    public void setPropuse(String propuse) {
-        this.propuse = propuse;
+    public void setPurpose(String purpose) {
+        this.purpose = purpose;
     }
 
     public String getDescription() {

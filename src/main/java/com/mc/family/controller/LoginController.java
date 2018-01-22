@@ -52,9 +52,9 @@ public class LoginController extends BaseController {
     @RequestMapping(value="/queryUserByUserId", method = RequestMethod.POST)
     public void queryUserByUserId(HttpServletRequest request, HttpServletResponse response) throws Exception {
         // step1: 开始, 获取输入参数
-//        UserInfo userInfo = input(request, UserInfo.class);
+        UserInfo userInfo = input(request, UserInfo.class);
         // step2: 查询用户信息
-        UserInfo userInfo = loginService.queryUserByUserId(Integer.valueOf(request.getParameter("userId")));
+        userInfo = loginService.queryUserByUserId(userInfo.getUserId());
         // step3: 结束, 返回结果
         output(response, userInfo);
     }

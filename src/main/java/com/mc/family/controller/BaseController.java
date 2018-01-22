@@ -2,6 +2,7 @@ package com.mc.family.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.mc.family.config.ConstantComm;
+import com.mc.family.config.ManagerLog;
 import com.mc.family.config.ManagerResult;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -39,44 +40,74 @@ public class BaseController {
         T t = clazz.newInstance();
         Field[] fields = clazz.getDeclaredFields();
         for (Field field : fields) {
-            String attrName = field.getName();
+            try {
+                String attrName = field.getName();
 
-            String getMethedName = ConstantComm.GET + attrName.substring(0, 1).toUpperCase()+ attrName.substring(1);
-            String setMethedName = ConstantComm.SET + attrName.substring(0, 1).toUpperCase()+ attrName.substring(1);
-
-            Method getMethed = clazz.getMethod(getMethedName);
-            Method setMethod = null;
-
-            Type type = getMethed.getGenericReturnType();
-            Class<? extends Object> setClass = null;
-            if (type instanceof ParameterizedType) {
-                String typeName = type.getTypeName();
-                setClass = Class.forName(typeName.substring(0, typeName.indexOf("<")));
-            } else {
-                if (ConstantComm.INT.equals(type.getTypeName())) {
-                    setClass = int.class;
-                } else if (ConstantComm.DOUBLE.equals(type.getTypeName())) {
-                    setClass = double.class;
-                } else if (ConstantComm.FLOAT.equals(type.getTypeName())) {
-                    setClass = float.class;
-                } else if (ConstantComm.BOOLEAN.equals(type.getTypeName())) {
-                    setClass = boolean.class;
-                } else if (ConstantComm.CHAR.equals(type.getTypeName())) {
-                    setClass = char.class;
-                } else if (ConstantComm.SHORT.equals(type.getTypeName())) {
-                    setClass = short.class;
-                } else if (ConstantComm.BYTE.equals(type.getTypeName())) {
-                    setClass = byte.class;
-                } else if (ConstantComm.LONG.equals(type.getTypeName())) {
-                    setClass = long.class;
-                } else {
-                    setClass = Class.forName(type.getTypeName());
+                Object value = request.getParameter(attrName);
+                if (value == null) {
+                    continue;
                 }
+
+                String getMethodName = ConstantComm.GET + attrName.substring(0, 1).toUpperCase()+ attrName.substring(1);
+                String setMethodName = ConstantComm.SET + attrName.substring(0, 1).toUpperCase()+ attrName.substring(1);
+
+                Method getMethod = clazz.getMethod(getMethodName);
+                Method setMethod = null;
+
+                Type type = getMethod.getGenericReturnType();
+                Class<? extends Object> setClass = null;
+                if (type instanceof ParameterizedType) {
+                    String typeName = type.getTypeName();
+                    setClass = Class.forName(typeName.substring(0, typeName.indexOf("<")));
+                } else {
+                    if (ConstantComm.INT.equals(type.getTypeName())) {
+                        setClass = int.class;
+                    } else if (ConstantComm.DOUBLE.equals(type.getTypeName())) {
+                        setClass = double.class;
+                    } else if (ConstantComm.FLOAT.equals(type.getTypeName())) {
+                        setClass = float.class;
+                    } else if (ConstantComm.BOOLEAN.equals(type.getTypeName())) {
+                        setClass = boolean.class;
+                    } else if (ConstantComm.CHAR.equals(type.getTypeName())) {
+                        setClass = char.class;
+                    } else if (ConstantComm.SHORT.equals(type.getTypeName())) {
+                        setClass = short.class;
+                    } else if (ConstantComm.BYTE.equals(type.getTypeName())) {
+                        setClass = byte.class;
+                    } else if (ConstantComm.LONG.equals(type.getTypeName())) {
+                        setClass = long.class;
+                    } else {
+                        setClass = Class.forName(type.getTypeName());
+                    }
+                }
+
+                setMethod = clazz.getMethod(setMethodName, setClass);
+
+                // 处理引用类型转换问题
+                if (!value.getClass().getTypeName().equals(type.getTypeName()) && value.getClass().getTypeName().equals(ConstantComm.OBJECT_STRING)) {
+                    String tempValue = (String)value;
+                    if (type.getTypeName().equals(ConstantComm.OBJECT_INTEGER)) {
+                        setMethod.invoke(t, Integer.valueOf(tempValue));
+                    } else if (type.getTypeName().equals(ConstantComm.OBJECT_FLOAT)) {
+                        setMethod.invoke(t, Float.valueOf(tempValue));
+                    } else if (type.getTypeName().equals(ConstantComm.OBJECT_DOUBLE)) {
+                        setMethod.invoke(t, Double.valueOf(tempValue));
+                    } else if (type.getTypeName().equals(ConstantComm.OBJECT_SHORT)) {
+                        setMethod.invoke(t, Short.valueOf(tempValue));
+                    } else if (type.getTypeName().equals(ConstantComm.OBJECT_LONG)) {
+                        setMethod.invoke(t, Long.valueOf(tempValue));
+                    } else {
+                        setMethod.invoke(t, value);
+                    }
+                } else {
+                    setMethod.invoke(t, value);
+                }
+
+            } catch (Exception e) {
+                ManagerLog.error(e, "input属性传输错误 : " , e.getMessage());
+                continue;
             }
 
-            setMethod = clazz.getMethod(setMethedName, setClass);
-            Object value = request.getParameter(attrName);
-            setMethod.invoke(t, value);
         }
 
         return t;
@@ -135,9 +166,9 @@ public class BaseController {
             //获取属性名
             String attrName = field.getName();
             //获取get方法名
-            String getMethedName = "get" + attrName.substring(0, 1).toUpperCase()+ attrName.substring(1);
+            String getMethodName = "get" + attrName.substring(0, 1).toUpperCase()+ attrName.substring(1);
             //拿到get方法
-            Method getMethod = clazz.getMethod(getMethedName);
+            Method getMethod = clazz.getMethod(getMethodName);
             //通过get方法获取属性值放入map中
             map.put(attrName, getMethod.invoke(t));
         }

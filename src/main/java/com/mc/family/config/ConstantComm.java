@@ -22,6 +22,16 @@ public class ConstantComm {
     public static String BYTE = "byte";
     public static String FLOAT = "float";
 
+    public static String OBJECT_INTEGER = "java.lang.Integer";
+    public static String OBJECT_DOUBLE = "java.lang.Double";
+    public static String OBJECT_SHORT= "java.lang.Short";
+    public static String OBJECT_LONG = "java.lang.Long";
+    public static String OBJECT_BOOLEAN = "java.lang.Boolean";
+    public static String OBJECT_CHAR = "java.lang.Char";
+    public static String OBJECT_BYTE = "java.lang.Byte";
+    public static String OBJECT_FLOAT = "java.lang.Float";
+    public static String OBJECT_STRING = "java.lang.String";
+
     // operation
     public static String GET = "get";
     public static String SET = "set";
