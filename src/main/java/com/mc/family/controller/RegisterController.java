@@ -1,6 +1,6 @@
 package com.mc.family.controller;
 
-import com.mc.family.model.UserInfo;
+import com.mc.family.dto.RegisterReqDto;
 import com.mc.family.service.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,11 +32,11 @@ public class RegisterController extends BaseController {
     @RequestMapping(value="/insert", method = RequestMethod.POST)
     public void addRegister(HttpServletRequest request, HttpServletResponse response) throws Exception {
         // step1: 开始, 获取输入参数
-        UserInfo userInfo = input(request, UserInfo.class);
+        RegisterReqDto reqDto = input(request, RegisterReqDto.class);
         // step2: 检查待添加用户用户信息是否合规
-        registerService.checkBeforeAddUser(userInfo);
+        registerService.checkBeforeAddUser(reqDto);
         // step3: 添加用户
-        registerService.addUser(userInfo);
+        registerService.addUser(reqDto);
         // step4: 结束, 返回结果
         output(response, null);
     }

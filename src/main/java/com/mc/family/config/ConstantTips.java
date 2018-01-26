@@ -15,9 +15,12 @@ public class ConstantTips {
     public static final String NONE_PHONE = "手机号不能为空";
     public static final String NONE_LOGIN_PASSWORD = "登录密码不能为空";
     public static final String USER_EXISTS = "用户已存在";
-    public static final String USER_NOT_EXISTS = "用户不存在";
 
     // login area
-    public static final String PASSWORD_WRONG= "登录密码不正确";
+    public static final String USER_NOT_EXISTS = "用户不存在";
+    public static final String WRONG_USERNAME_OR_PASSWORD = "用户名或密码错误";
+
+    // main area
+    public static final String USER_QUERY_ERROR = "获取用户信息异常, 请重新登录";
 }
 

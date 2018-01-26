@@ -1,11 +1,20 @@
-package com.mc.family.model;
+package com.mc.family.dto;
 
-import java.util.Date;
+import com.mc.family.vo.BaseVo;
 
-public class AccountInfo {
-    private Integer id;
-
+/**
+ * @author ChenglongChu
+ * @description 日常账户管理请求DTO, 便于理解服务接口报文和接收请求输入
+ * 所有DTO要集成BaseVo模型来序列化
+ * 涉及的接口服务为:
+ * AccountController.addAccount
+ * @create 2018/01/25 14:47
+ * @since v0.4
+ */
+public class AccountReqDto extends BaseVo {
     private Integer userId;
+
+    private String nativeUm;
 
     private String username;
 
@@ -25,21 +34,11 @@ public class AccountInfo {
 
     private Integer relId;
 
-    private String creator;
+    private String loginPassword;
 
-    private Date createTime;
+    private String queryPassword;
 
-    private String updater;
-
-    private Date lastModifyTime;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    private String dealPassword;
 
     public Integer getUserId() {
         return userId;
@@ -47,6 +46,14 @@ public class AccountInfo {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public String getNativeUm() {
+        return nativeUm;
+    }
+
+    public void setNativeUm(String nativeUm) {
+        this.nativeUm = nativeUm;
     }
 
     public String getUsername() {
@@ -121,35 +128,27 @@ public class AccountInfo {
         this.relId = relId;
     }
 
-    public String getCreator() {
-        return creator;
+    public String getLoginPassword() {
+        return loginPassword;
     }
 
-    public void setCreator(String creator) {
-        this.creator = creator;
+    public void setLoginPassword(String loginPassword) {
+        this.loginPassword = loginPassword;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public String getQueryPassword() {
+        return queryPassword;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setQueryPassword(String queryPassword) {
+        this.queryPassword = queryPassword;
     }
 
-    public String getUpdater() {
-        return updater;
+    public String getDealPassword() {
+        return dealPassword;
     }
 
-    public void setUpdater(String updater) {
-        this.updater = updater;
-    }
-
-    public Date getLastModifyTime() {
-        return lastModifyTime;
-    }
-
-    public void setLastModifyTime(Date lastModifyTime) {
-        this.lastModifyTime = lastModifyTime;
+    public void setDealPassword(String dealPassword) {
+        this.dealPassword = dealPassword;
     }
 }

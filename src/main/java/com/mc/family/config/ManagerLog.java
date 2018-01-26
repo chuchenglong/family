@@ -26,7 +26,7 @@ public class ManagerLog {
     /**
      * @description Trace等级日志，小于debug
      * @param log 日志对象
-     * @param format 格式文本，{} 代表变量
+     * @param format 格式文本, {} 代表变量
      * @param arguments 变量对应的参数
      * @author ChenglongChu
      * @create 2018/1/10 14:02
@@ -38,9 +38,9 @@ public class ManagerLog {
 
     //------------------------debug
     /**
-     * @description Trace等级日志，小于Info<br>
-     * 由于动态获取Logger，效率较低，建议在非频繁调用的情况下使用！！
-     * @param format 格式文本，{} 代表变量
+     * @description Debug等级日志, 小于Info<br>
+     * 由于动态获取Logger, 效率较低, 建议在非频繁调用的情况下使用
+     * @param format 格式文本, {} 代表变量
      * @param arguments 变量对应的参数
      * @author ChenglongChu
      * @create 2018/1/10 14:02
@@ -51,9 +51,9 @@ public class ManagerLog {
     }
 
     /**
-     * @description Trace等级日志，小于Info
+     * @description Debug等级日志, 小于Info
      * @param log 日志对象
-     * @param format 格式文本，{} 代表变量
+     * @param format 格式文本, {} 代表变量
      * @param arguments 变量对应的参数
      * @author ChenglongChu
      * @create 2018/1/10 14:02
@@ -65,9 +65,9 @@ public class ManagerLog {
 
     //------------------------info
     /**
-     * @description Trace等级日志，小于debug<br>
-     * 由于动态获取Logger，效率较低，建议在非频繁调用的情况下使用！！
-     * @param format 格式文本，{} 代表变量
+     * @description Info等级日志, 小于Warn<br>
+     * 由于动态获取Logger, 效率较低, 建议在非频繁调用的情况下使用
+     * @param format 格式文本, {} 代表变量
      * @param arguments 变量对应的参数
      * @author ChenglongChu
      * @create 2018/1/10 14:02
@@ -78,9 +78,9 @@ public class ManagerLog {
     }
 
     /**
-     * @description Trace等级日志，小于Warn
+     * @description Info等级日志, 小于Warn
      * @param log 日志对象
-     * @param format 格式文本，{} 代表变量
+     * @param format 格式文本, {} 代表变量
      * @param arguments 变量对应的参数
      * @author ChenglongChu
      * @create 2018/1/10 14:02
@@ -92,9 +92,9 @@ public class ManagerLog {
 
     //------------------------warn
     /**
-     * @description Trace等级日志，小于debug<br>
-     * 由于动态获取Logger，效率较低，建议在非频繁调用的情况下使用！！
-     * @param format 格式文本，{} 代表变量
+     * @description Warn等级日志, 小于Error<br>
+     * 由于动态获取Logger, 效率较低, 建议在非频繁调用的情况下使用
+     * @param format 格式文本, {} 代表变量
      * @param arguments 变量对应的参数
      * @author ChenglongChu
      * @create 2018/1/10 14:02
@@ -106,9 +106,9 @@ public class ManagerLog {
     }
 
     /**
-     * @description Trace等级日志，小于Error
+     * @description Warn等级日志, 小于Error
      * @param log 日志对象
-     * @param format 格式文本，{} 代表变量
+     * @param format 格式文本, {} 代表变量
      * @param arguments 变量对应的参数
      * @author ChenglongChu
      * @create 2018/1/10 14:02
@@ -119,10 +119,10 @@ public class ManagerLog {
     }
 
     /**
-     * @description Warn等级日志，小于Error<br>
-     * 由于动态获取Logger，效率较低，建议在非频繁调用的情况下使用！！
+     * @description Warn等级日志, 小于Error<br>
+     * 由于动态获取Logger, 效率较低, 建议在非频繁调用的情况下使用
      * @param e 需在日志中堆栈打印的异常
-     * @param format 格式文本，{} 代表变量
+     * @param format 格式文本, {} 代表变量
      * @param arguments 变量对应的参数
      * @author ChenglongChu
      * @create 2018/1/10 14:02
@@ -133,10 +133,10 @@ public class ManagerLog {
     }
 
     /**
-     * @description Warn等级日志，小于Error
+     * @description Warn等级日志, 小于Error
      * @param log 日志对象
      * @param e 需在日志中堆栈打印的异常
-     * @param format 格式文本，{} 代表变量
+     * @param format 格式文本, {} 代表变量
      * @param arguments 变量对应的参数
      * @author ChenglongChu
      * @create 2018/1/10 14:02
@@ -148,9 +148,9 @@ public class ManagerLog {
 
     //------------------------error
     /**
-     * @description error等级日志
-     * 由于动态获取Logger，效率较低，建议在非频繁调用的情况下使用！！
-     * @param format 格式文本，{} 代表变量
+     * @description Error等级日志
+     * 由于动态获取Logger, 效率较低, 建议在非频繁调用的情况下使用
+     * @param format 格式文本, {} 代表变量
      * @param arguments 变量对应的参数
      * @author ChenglongChu
      * @create 2018/1/10 14:02
@@ -161,9 +161,9 @@ public class ManagerLog {
     }
 
     /**
-     * @description Trace等级日志，小于debug
+     * @description Error等级日志
      * @param log 日志对象
-     * @param format 格式文本，{} 代表变量
+     * @param format 格式文本, {} 代表变量
      * @param arguments 变量对应的参数
      * @author ChenglongChu
      * @create 2018/1/10 14:02
@@ -175,9 +175,9 @@ public class ManagerLog {
 
     /**
      * @description Error等级日志<br>
-     * 由于动态获取Logger，效率较低，建议在非频繁调用的情况下使用！！
+     * 由于动态获取Logger, 效率较低, 建议在非频繁调用的情况下使用
      * @param e 需在日志中堆栈打印的异常
-     * @param format 格式文本，{} 代表变量
+     * @param format 格式文本, {} 代表变量
      * @param arguments 变量对应的参数
      * @author ChenglongChu
      * @create 2018/1/10 14:02
@@ -189,10 +189,10 @@ public class ManagerLog {
 
     /**
      * @description Error等级日志<br>
-     * 由于动态获取Logger，效率较低，建议在非频繁调用的情况下使用！！
+     * 由于动态获取Logger, 效率较低, 建议在非频繁调用的情况下使用
      * @param log 日志对象
      * @param e 需在日志中堆栈打印的异常
-     * @param format 格式文本，{} 代表变量
+     * @param format 格式文本, {} 代表变量
      * @param arguments 变量对应的参数
      * @author ChenglongChu
      * @create 2018/1/10 14:02
@@ -205,7 +205,7 @@ public class ManagerLog {
     //-----------------------------------------------------------Logger method end
     /**
      * @description 格式化文本
-     * @param template 文本模板，被替换的部分用 {} 表示
+     * @param template 文本模板, 被替换的部分用 {} 表示
      * @param values 参数值
      * @return 格式化后的文本
      * @author ChenglongChu
@@ -218,7 +218,7 @@ public class ManagerLog {
 
     /**
      * @description 获取当前调用类
-     * @return 获得日志，自动判定日志发出者
+     * @return 获得日志, 自动判定日志发出者
      * @author ChenglongChu
      * @create 2018/1/10 14:02
      * @since v0.2

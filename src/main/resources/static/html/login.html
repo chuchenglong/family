@@ -5,8 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <meta name="description" content="use for login in family system.">
+    <meta name="description" content="family login page.">
     <meta name="author" content="chuchenglong">
+    <meta name="keyword" content="chuchenglong,ChenglongChu,chenglong,martinchor,martin,java">
     <title>Family Login</title>
     <link href="../css/login.css" rel="stylesheet">
     <script type="text/javascript" src="../js/common/family-load.js"></script>
@@ -14,15 +15,10 @@
 </head>
 
 <body>
+<!-- 导航部分 -->
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-collapse collapse">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
             <ul class="nav navbar-nav navbar-right">
                 <li class="active fix-weight-center"><a href="register.html">注册 <span class="sr-only">(current)</span></a></li>
             </ul>
@@ -30,13 +26,14 @@
     </div>
 </nav>
 
+<!-- 内容部分 -->
 <div class="container">
     <div class="form-login">
         <h2 class="form-login-heading">请填入您的登录信息</h2>
         <label for="username" class="sr-only">Username</label>
         <input id="username" type="text" class="form-control" placeholder="用户名/邮箱/手机号">
-        <label for="loginPassword" class="sr-only">Password</label>
-        <input id="loginPassword" type="password" class="form-control" placeholder="登录密码">
+        <label for="password" class="sr-only">Password</label>
+        <input id="password" type="password" class="form-control" placeholder="登录密码">
         <div class="checkbox">
             <label>
                 <input type="checkbox" value="remember-me"> 记住我

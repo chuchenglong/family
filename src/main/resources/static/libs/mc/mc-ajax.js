@@ -34,10 +34,13 @@ $mc_x.ajax_get = function(url, params, successCallback, failCallBack) {
 
 /**  apply to post request */
 $mc_x.ajax_post = function(url, params, successCallback, failCallBack) {
+    var p = params;
+    p.userId = 10000001;
+    p.nativeUm = "chuchenglong";
     $.ajax({
         type: "POST",
         url: url,
-        data: params,
+        data: p,
         dataType: "json",
         success: function(result) {
             return successCallback(result);

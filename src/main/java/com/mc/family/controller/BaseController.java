@@ -23,7 +23,7 @@ import java.util.Map;
 
 /**
  * @author ChenglongChu
- * @description 提供controller层基础公共方法
+ * @description 提供controller层基础公共方法, 仅提供方法, 不暴露服务
  * @create 2017/12/13 14:11
  * @since v0.1
  */
@@ -114,7 +114,7 @@ public class BaseController {
     }
 
     /**
-     * @description 输出结果
+     * @description 输出结果, 固定结果模型
      * @param response servlet返回参数
      * @param obj 结果对象
      * @throws java.lang.Exception
@@ -122,9 +122,9 @@ public class BaseController {
      * @create 2017/12/14 17:49
     **/
     protected void output(HttpServletResponse response, Object obj) throws Exception {
-        //to json string
+        // 转String字符串
         String json = JSONObject.toJSONStringWithDateFormat(ManagerResult.newSuccess(obj), ConstantComm.DATE_FORMAT_ONE);
-        //output response
+        // 输出流
         PrintWriter out = response.getWriter();
         out.print(json);
         out.flush();
@@ -132,7 +132,7 @@ public class BaseController {
     }
 
     /**
-     * @description 输出结果
+     * @description 输出结果, 不固定结果模型
      * @param response servlet返回参数
      * @param obj 结果对象
      * @throws java.lang.Exception
@@ -140,9 +140,9 @@ public class BaseController {
      * @create 2017/12/14 17:49
      **/
     protected void commOutput(HttpServletResponse response, Object obj) throws Exception {
-        //to json string
+        // 转String字符串
         String json = JSONObject.toJSONStringWithDateFormat(obj, ConstantComm.DATE_FORMAT_ONE);
-        //output response
+        // 输出流
         PrintWriter out = response.getWriter();
         out.print(json);
         out.flush();

@@ -25,16 +25,16 @@ function submit() {
     params.username = $("#username").val();
     params.email = $("#email").val();
     params.phone = $("#phone").val();
-    params.loginPassword = $("#loginPassword").val();
-    params.dealPassword = $("#dealPassword").val();
-    params.realName = $("#realName").val();
     params.alias = $("#alias").val();
     params.gender = $("input[name='gender']:checked").val();
+    params.photo = $("#photo").val();
+    params.brief = $("#brief").val();
+    params.password = $("#password").val();
 
     // 请求注册用户
     $mc_x.ajax_post("/register/insert", params, function(result){
         if (result.code == MC_RESULT_SUCCESS) {
-            Ewin.alert({ message: "register success !" }).on(function () {
+            Ewin.alert({ message: "注册成功 !" }).on(function () {
                 $mc_w.url("login.html");
             });
         } else {

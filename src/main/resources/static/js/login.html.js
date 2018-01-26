@@ -20,10 +20,11 @@ $(function() {
 function submit() {
     var params = {};
     params.username = $("#username").val();
-    params.loginPassword = $("#loginPassword").val();
+    params.password = $("#password").val();
     $mc_x.ajax_post("/login/check", params, function(result){
         if (result.code == MC_RESULT_SUCCESS) {
-            $mc_w.url("core.html", {"userId":result.data.userId});
+            console.log(result.data);
+            $mc_w.url("core.html", {"userId":result.data});
         } else {
             Ewin.alert({ message: result.message });
         }

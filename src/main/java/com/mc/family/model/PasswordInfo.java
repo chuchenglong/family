@@ -2,10 +2,12 @@ package com.mc.family.model;
 
 import java.util.Date;
 
-public class AccountPassword {
-    private Integer passwordId;
+public class PasswordInfo {
+    private Integer id;
 
-    private Integer accountId;
+    private Integer relId;
+
+    private String relType;
 
     private String passwordType;
 
@@ -19,20 +21,28 @@ public class AccountPassword {
 
     private Date lastModifyTime;
 
-    public Integer getPasswordId() {
-        return passwordId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setPasswordId(Integer passwordId) {
-        this.passwordId = passwordId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public Integer getAccountId() {
-        return accountId;
+    public Integer getRelId() {
+        return relId;
     }
 
-    public void setAccountId(Integer accountId) {
-        this.accountId = accountId;
+    public void setRelId(Integer relId) {
+        this.relId = relId;
+    }
+
+    public String getRelType() {
+        return relType;
+    }
+
+    public void setRelType(String relType) {
+        this.relType = relType;
     }
 
     public String getPasswordType() {

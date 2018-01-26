@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mc.family.mapper.DataInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.mc.family.model.DataInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="parent_code" property="parentCode" jdbcType="VARCHAR" />
+    <result column="data_code" property="dataCode" jdbcType="VARCHAR" />
+    <result column="data_name" property="dataName" jdbcType="VARCHAR" />
+    <result column="display" property="display" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="creator" property="creator" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="updater" property="updater" jdbcType="VARCHAR" />
+    <result column="last_modify_time" property="lastModifyTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_data_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mc.family.model.DataInfo" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_data_info (parent_code, data_code, data_name, 
+      display, description, creator, 
+      create_time, updater, last_modify_time
+      )
+    values (#{parentCode,jdbcType=VARCHAR}, #{dataCode,jdbcType=VARCHAR}, #{dataName,jdbcType=VARCHAR}, 
+      #{display,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR}, #{lastModifyTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.mc.family.model.DataInfo" >
+    update t_data_info
+    set parent_code = #{parentCode,jdbcType=VARCHAR},
+      data_code = #{dataCode,jdbcType=VARCHAR},
+      data_name = #{dataName,jdbcType=VARCHAR},
+      display = #{display,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=VARCHAR},
+      last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, parent_code, data_code, data_name, display, description, creator, create_time, 
+    updater, last_modify_time
+    from t_data_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, parent_code, data_code, data_name, display, description, creator, create_time, 
+    updater, last_modify_time
+    from t_data_info
+  </select>
+
+  <select id="selectDatasByParentCode" resultMap="BaseResultMap" >
+    select id, parent_code, data_code, data_name, display, description, creator, create_time,
+    updater, last_modify_time
+    from t_data_info where parent_code = #{code}
+  </select>
+
+
+
+
+</mapper>

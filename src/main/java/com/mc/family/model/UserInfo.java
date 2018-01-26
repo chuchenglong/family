@@ -3,7 +3,7 @@ package com.mc.family.model;
 import java.util.Date;
 
 public class UserInfo {
-    private Integer userId;
+    private Integer id;
 
     private String username;
 
@@ -13,9 +13,9 @@ public class UserInfo {
 
     private Integer roleId;
 
-    private String loginPassword;
+    private String certType;
 
-    private String dealPassword;
+    private String certNo;
 
     private String realName;
 
@@ -27,16 +27,18 @@ public class UserInfo {
 
     private String brief;
 
+    private String status;
+
     private Date createTime;
 
     private Date lastModifyTime;
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -71,20 +73,20 @@ public class UserInfo {
         this.roleId = roleId;
     }
 
-    public String getLoginPassword() {
-        return loginPassword;
+    public String getCertType() {
+        return certType;
     }
 
-    public void setLoginPassword(String loginPassword) {
-        this.loginPassword = loginPassword;
+    public void setCertType(String certType) {
+        this.certType = certType;
     }
 
-    public String getDealPassword() {
-        return dealPassword;
+    public String getCertNo() {
+        return certNo;
     }
 
-    public void setDealPassword(String dealPassword) {
-        this.dealPassword = dealPassword;
+    public void setCertNo(String certNo) {
+        this.certNo = certNo;
     }
 
     public String getRealName() {
@@ -125,6 +127,14 @@ public class UserInfo {
 
     public void setBrief(String brief) {
         this.brief = brief;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Date getCreateTime() {

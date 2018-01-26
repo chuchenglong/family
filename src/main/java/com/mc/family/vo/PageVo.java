@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * @author ChenglongChu
- * @description 分页查询结果属性vo
+ * @description 分页查询属性VO
  * @create 2018/01/18 15:06
  * @since 0.3
  */

@@ -1,6 +1,6 @@
 package com.mc.family.controller;
 
-import com.mc.family.model.AccountInfo;
+import com.mc.family.dto.AccountReqDto;
 import com.mc.family.service.AccountService;
 import com.mc.family.vo.PageVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author ChenglongChu
- * @description 账户相关接口服务
+ * @description 账户相关服务接口
  * @create 2017/12/22 15:01
  * @since v0.1
  */
@@ -33,13 +33,18 @@ public class AccountController extends BaseController {
      **/
     @RequestMapping(value="/insert", method = RequestMethod.POST)
     public void addAccount(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        AccountInfo accountInfo = input(request, AccountInfo.class);
-        accountService.addAccount(accountInfo);
+        // step1: 处理请求参数, 添加内容
+        AccountReqDto reqDto = input(request, AccountReqDto.class);
+        // step2: 检查待添加账户信息, 待后续实现
+//        accountService.checkBeforeAddAccount(accountInfo);
+        // step3: 新增账户信息
+        accountService.addAccount(reqDto);
+        // step4: 结束, 返回结果
         output(response, null);
     }
 
     /**
-     * @description 账户列表查询接口
+     * @description 账户列表分页条件查询服务接口
      * @param request 请求参数
      * @param response 返回参数
      * @throws java.lang.Exception
@@ -48,18 +53,14 @@ public class AccountController extends BaseController {
     **/
     @RequestMapping(value="/listPage", method = RequestMethod.POST)
     public void queryAccountListPageByUserId(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        // 处理请求参数, 包括查询条件
-        AccountInfo accountInfo = input(request, AccountInfo.class);
-        // 根据用户ID查询用户下账户列表
-        PageVo pageVo = accountService.queryAccountListPageByUserId(accountInfo);
-        // 输出查询结果
+        // step1: 处理请求参数, 包括查询条件
+        AccountReqDto reqDto = input(request, AccountReqDto.class);
+        // step2: 根据用户ID分页查询用户下账户列表
+        PageVo pageVo = accountService.queryAccountListPageByUserId(reqDto);
+        // step3: 结束, 返回结果
         commOutput(response, pageVo);
     }
 
-    @RequestMapping(value="/list", method = RequestMethod.POST)
-    public void queryAccountListByUserId(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        output(response, null);
-    }
 
 
 }

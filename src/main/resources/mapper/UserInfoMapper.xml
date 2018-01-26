@@ -2,39 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mc.family.mapper.UserInfoMapper" >
   <resultMap id="BaseResultMap" type="com.mc.family.model.UserInfo" >
-    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <id column="id" property="id" jdbcType="INTEGER" />
     <result column="username" property="username" jdbcType="VARCHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="VARCHAR" />
     <result column="role_id" property="roleId" jdbcType="INTEGER" />
-    <result column="login_password" property="loginPassword" jdbcType="VARCHAR" />
-    <result column="deal_password" property="dealPassword" jdbcType="VARCHAR" />
+    <result column="cert_type" property="certType" jdbcType="VARCHAR" />
+    <result column="cert_no" property="certNo" jdbcType="VARCHAR" />
     <result column="real_name" property="realName" jdbcType="VARCHAR" />
     <result column="alias" property="alias" jdbcType="VARCHAR" />
     <result column="gender" property="gender" jdbcType="VARCHAR" />
     <result column="photo" property="photo" jdbcType="VARCHAR" />
     <result column="brief" property="brief" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="last_modify_time" property="lastModifyTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_user_info
-    where user_id = #{userId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.mc.family.model.UserInfo" >
-    <selectKey resultType="java.lang.Integer" keyProperty="userId" order="AFTER" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into t_user_info (username, email, phone, 
-      role_id, login_password, deal_password, 
+      role_id, cert_type, cert_no, 
       real_name, alias, gender, 
-      photo, brief, create_time, 
-      last_modify_time)
+      photo, brief, status, 
+      create_time, last_modify_time)
     values (#{username,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
-      #{roleId,jdbcType=INTEGER}, #{loginPassword,jdbcType=VARCHAR}, #{dealPassword,jdbcType=VARCHAR}, 
+      #{roleId,jdbcType=INTEGER}, #{certType,jdbcType=VARCHAR}, #{certNo,jdbcType=VARCHAR}, 
       #{realName,jdbcType=VARCHAR}, #{alias,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, 
-      #{photo,jdbcType=VARCHAR}, #{brief,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{lastModifyTime,jdbcType=TIMESTAMP})
+      #{photo,jdbcType=VARCHAR}, #{brief,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{lastModifyTime,jdbcType=TIMESTAMP})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.mc.family.model.UserInfo" >
     update t_user_info
@@ -42,43 +43,39 @@
       email = #{email,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       role_id = #{roleId,jdbcType=INTEGER},
-      login_password = #{loginPassword,jdbcType=VARCHAR},
-      deal_password = #{dealPassword,jdbcType=VARCHAR},
+      cert_type = #{certType,jdbcType=VARCHAR},
+      cert_no = #{certNo,jdbcType=VARCHAR},
       real_name = #{realName,jdbcType=VARCHAR},
       alias = #{alias,jdbcType=VARCHAR},
       gender = #{gender,jdbcType=VARCHAR},
       photo = #{photo,jdbcType=VARCHAR},
       brief = #{brief,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP}
-    where user_id = #{userId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select user_id, username, email, phone, role_id, login_password, deal_password, real_name, 
-    alias, gender, photo, brief, create_time, last_modify_time
+    select id, username, email, phone, role_id, cert_type, cert_no, real_name, alias, 
+    gender, photo, brief, status, create_time, last_modify_time
     from t_user_info
-    where user_id = #{userId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
-    select user_id, username, email, phone, role_id, login_password, deal_password, real_name, 
-    alias, gender, photo, brief, create_time, last_modify_time
+    select id, username, email, phone, role_id, cert_type, cert_no, real_name, alias, 
+    gender, photo, brief, status, create_time, last_modify_time
     from t_user_info
   </select>
 
-  <select id="selectUserByContent" resultMap="BaseResultMap">
-  select user_id, username, email, phone, role_id, login_password, deal_password, real_name,
-    alias, gender, photo, brief, create_time, last_modify_time
-  from t_user_info
-  where 1=1 and (1=0
-  <if test="username != null and username != '' ">
-    or username = #{username}
-  </if>
-  <if test="email != null and email != '' ">
-    or email = #{email}
-  </if>
-  <if test="phone != null and phone != '' ">
-    or phone = #{phone}
-  </if>
-  )
+  <select id="selectUserLoginByContent" resultType="java.lang.Integer" parameterType="com.mc.family.dto.LoginReqDto">
+    select t1.id userId from t_user_info t1, t_password_info t2
+    where t1.id = t2.rel_id and t2.rel_type = 'native' and t1.status = 'user_status_001'
+    and (t1.username = #{username} or  t1.email = #{username} or t1.phone = #{username})
+    and t2.password_type = 'password_type_001'
+    and t2.password = #{password}
+  </select>
+
+  <select id="selectUserCountByContent" resultType="java.lang.Integer" parameterType="com.mc.family.dto.RegisterReqDto">
+    select count(1) from t_user_info where username = #{username} or  email = #{email} or phone = #{phone}
   </select>
 </mapper>

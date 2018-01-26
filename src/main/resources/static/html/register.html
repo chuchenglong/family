@@ -5,8 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <meta name="description" content="use for register family system.">
+    <meta name="description" content="family register page.">
     <meta name="author" content="chuchenglong">
+    <meta name="keyword" content="chuchenglong,ChenglongChu,chenglong,martinchor,martin,java">
     <title>Family Register</title>
     <link href="../css/register.css" rel="stylesheet">
     <script type="text/javascript" src="../js/common/family-load.js"></script>
@@ -14,15 +15,10 @@
 </head>
 
 <body>
+<!-- 导航部分 -->
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-collapse collapse">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
             <ul class="nav navbar-nav navbar-right">
                 <li class="active fix-weight-center"><a href="login.html">登录 <span class="sr-only">(current)</span></a></li>
             </ul>
@@ -30,7 +26,7 @@
     </div>
 </nav>
 
-</div>
+<!-- 内容部分 -->
 <div class="container">
     <div class="form-register">
         <h3 class="form-register-heading">请填入您的注册信息</h3>
@@ -48,10 +44,6 @@
                 <td><input id="phone" type="text" class="form-control" placeholder="请填入您的手机号"></td>
             </tr>
             <tr>
-                <td><label for="realName">真实姓名 : </label></td>
-                <td><input id="realName" type="text" class="form-control" placeholder="请填入您的真实姓名"></td>
-            </tr>
-            <tr>
                 <td><label for="alias">昵称 : </label></td>
                 <td><input id="alias" type="text" class="form-control" placeholder="请填入您的昵称"></td>
             </tr>
@@ -63,12 +55,19 @@
                 </td>
             </tr>
             <tr>
-                <td><label for="loginPassword">登录密码 : </label></td>
-                <td><input id="loginPassword" type="password" class="form-control" placeholder="请填入您的登录密码"></td>
+                <td><label for="photo">人物头像 : </label></td>
+                <td><input id="photo" type="text" class="form-control" placeholder="请上传您的人物头像"></td>
             </tr>
             <tr>
-                <td><label for="dealPassword">交易密码 : </label></td>
-                <td><input id="dealPassword" type="password" class="form-control" placeholder="请填入您的交易密码"></td>
+                <td><label for="brief">个人简介 : </label></td>
+                <td><input id="brief" type="text" class="form-control" placeholder="请填写您的个人简介"></td>
+            </tr>
+            <tr>
+                <td><label for="password">登录密码 : </label></td>
+                <td>
+                    <input type="text" id="hideArea" style="display: none";>
+                    <input id="password" type="text" autocomplete="off" onfocus="this.type='password'" class="form-control" placeholder="请填入您的登录密码">
+                </td>
             </tr>
         </table>
 
