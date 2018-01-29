@@ -72,11 +72,11 @@
     rel_id, creator, create_time, updater, last_modify_time
     from t_account_info
     where user_id = #{userId}
-    limit #{startPoint}, #{endPoint}
     order by id desc
+    limit #{offset}, #{limit}
   </select>
 
-  <select id="selectAccountListPageCountByUserId" resultMap="BaseResultMap" >
+  <select id="selectAccountListPageCountByUserId" resultType="java.lang.Integer">
     select count(1) from t_account_info where user_id = #{userId}
   </select>
 

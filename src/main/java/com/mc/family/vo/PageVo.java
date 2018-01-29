@@ -12,27 +12,27 @@ public class PageVo extends BaseVo {
     /**
      * 页面大小/每页行数量
      */
-    private transient int pageSize;
+    private transient int limit;
 
     /**
-     * 页码/第几页, 以1开始
+     * 以多少开始, 起点为0
      */
-    private transient int pageNumber;
+    private transient int offset;
 
     /**
-     * 可供选择的页面大小/每页行数量
+     * 排序字段, 暂未使用
      */
-    private transient int[] pageList;
+    private transient String sort;
 
     /**
-     * 数据起始位置, 以0开始
+     * 升降序, 默认asc, 暂未使用
      */
-    private transient int startPoint;
+    private transient String order;
 
     /**
-     * 数据结束位置
+     * 模糊查询字段, 暂未使用
      */
-    private transient int endPoint;
+    private transient String search;
 
     /**
      * 数据总数量
@@ -44,44 +44,44 @@ public class PageVo extends BaseVo {
      */
     private List<? extends Object> rows;
 
-    public int getPageSize() {
-        return pageSize;
+    public int getLimit() {
+        return limit;
     }
 
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
+    public void setLimit(int limit) {
+        this.limit = limit;
     }
 
-    public int getPageNumber() {
-        return pageNumber;
+    public int getOffset() {
+        return offset;
     }
 
-    public void setPageNumber(int pageNumber) {
-        this.pageNumber = pageNumber;
+    public void setOffset(int offset) {
+        this.offset = offset;
     }
 
-    public int[] getPageList() {
-        return pageList;
+    public String getSort() {
+        return sort;
     }
 
-    public void setPageList(int[] pageList) {
-        this.pageList = pageList;
+    public void setSort(String sort) {
+        this.sort = sort;
     }
 
-    public int getStartPoint() {
-        return startPoint;
+    public String getOrder() {
+        return order;
     }
 
-    public void setStartPoint(int startPoint) {
-        this.startPoint = startPoint;
+    public void setOrder(String order) {
+        this.order = order;
     }
 
-    public int getEndPoint() {
-        return endPoint;
+    public String getSearch() {
+        return search;
     }
 
-    public void setEndPoint(int endPoint) {
-        this.endPoint = endPoint;
+    public void setSearch(String search) {
+        this.search = search;
     }
 
     public int getTotal() {
@@ -99,7 +99,5 @@ public class PageVo extends BaseVo {
     public void setRows(List<? extends Object> rows) {
         this.rows = rows;
     }
-
-
 }
 

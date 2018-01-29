@@ -12,9 +12,6 @@ import com.mc.family.vo.BaseVo;
  * @since v0.4
  */
 public class LoginResDto extends BaseVo {
-    // 用户ID
-    private Integer userId;
-
     // 用户昵称
     private String username;
 
@@ -27,14 +24,6 @@ public class LoginResDto extends BaseVo {
     // 最后登录时间
     // 角色对应功能权限
     // 一些其他需要加载展示的用户信息
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
 
     public String getUsername() {
         return username;

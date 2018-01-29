@@ -42,7 +42,6 @@ function submit() {
     params.loginPassword = $("#loginPassword").val();
     params.queryPassword = $("#queryPassword").val();
     params.dealPassword = $("#dealPassword").val();
-    console.log(params);
     $mc_x.ajax_post("/account/insert", params, function(result) {
         if (result.code == MC_RESULT_SUCCESS) {
             Ewin.alert("添加生活账户成功 !");

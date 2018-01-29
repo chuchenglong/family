@@ -11,4 +11,14 @@ import java.io.Serializable;
 public class BaseVo implements Serializable {
     private static final long serialVersionUID = 1516602995249L;
 
+    private Integer userId;
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
 }

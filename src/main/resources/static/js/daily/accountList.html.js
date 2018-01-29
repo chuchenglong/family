@@ -2,7 +2,7 @@ $(function () {
     var columns = [
         // {checkbox: true},
         {field: 'description', title: '账户描述'},
-        {field: 'accountNo', title: '用户名/账户'},
+        {field: 'username', title: '用户名/账户'},
         {field: 'phone', title: '手机号'},
         {field: 'email', title: '邮箱'},
         {field: 'classify', title: '类别'},
@@ -28,10 +28,11 @@ $(function () {
         }}
     ];
 
-    //1.初始化Table
+    // 初始化table
     $mc_t.init_page_table("tb_departments", columns, "/account/listPage");
 
-    $mc_s.init_select_ajax("classify", "/account/listClassify");
+    // 初始化生活账户类别条件选择下拉框
+    $mc_s.init_select_ajax("classify", "/publish/data", {"code":"daily_account_classify"}, "生活账户类别");
 
 });
 

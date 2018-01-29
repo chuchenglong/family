@@ -3,6 +3,7 @@ package com.mc.family.controller;
 import com.mc.family.dto.LoginReqDto;
 import com.mc.family.dto.LoginResDto;
 import com.mc.family.service.LoginService;
+import com.mc.family.vo.BaseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,7 +53,7 @@ public class LoginController extends BaseController {
     @RequestMapping(value="/main", method = RequestMethod.POST)
     public void queryMainInfoByUserId(HttpServletRequest request, HttpServletResponse response) throws Exception {
         // step1: 开始, 获取输入参数, 即userId
-        LoginReqDto reqDto = input(request, LoginReqDto.class);
+        BaseVo reqDto = input(request, BaseVo.class);
         // step2: 查询用户信息
         LoginResDto resDto = loginService.queryMainInfoByUserId(reqDto.getUserId());
         // step3: 结束, 返回结果

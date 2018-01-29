@@ -34,13 +34,16 @@ $mc_x.ajax_get = function(url, params, successCallback, failCallBack) {
 
 /**  apply to post request */
 $mc_x.ajax_post = function(url, params, successCallback, failCallBack) {
-    var p = params;
-    p.userId = 10000001;
-    p.nativeUm = "chuchenglong";
+    if (params == undefined || params == null) {
+        params = {};
+    }
+    if (params.userId == undefined || params.userId == null) {
+        params.userId = window.parent.document.getElementById("userId").value;
+    }
     $.ajax({
         type: "POST",
         url: url,
-        data: p,
+        data: params,
         dataType: "json",
         success: function(result) {
             return successCallback(result);
@@ -48,6 +51,21 @@ $mc_x.ajax_post = function(url, params, successCallback, failCallBack) {
         error : function(result) {
             return failCallBack(result);
         }
+    });
+}
 
+/**  apply to post request */
+$mc_x.ajax_post_none = function(url, params, successCallback, failCallBack) {
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: params,
+        dataType: "json",
+        success: function(result) {
+            return successCallback(result);
+        },
+        error : function(result) {
+            return failCallBack(result);
+        }
     });
 }

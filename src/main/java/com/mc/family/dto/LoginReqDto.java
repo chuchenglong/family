@@ -17,8 +17,6 @@ public class LoginReqDto extends BaseVo {
     private String username;
     // 登录密码
     private String password;
-    // 用户ID
-    private Integer userId;
 
     public String getUsername() {
         return username;
@@ -36,11 +34,4 @@ public class LoginReqDto extends BaseVo {
         this.password = password;
     }
 
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
 }

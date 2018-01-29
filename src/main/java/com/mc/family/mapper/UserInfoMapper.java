@@ -18,7 +18,7 @@ public interface UserInfoMapper {
     int updateByPrimaryKey(UserInfo record);
 
     // 根据用户名/手机号/邮箱, 检查用户登录信息, 返回用户的userId
-    int selectUserLoginByContent(LoginReqDto reqDto);
+    Integer selectUserLoginByContent(LoginReqDto reqDto);
     // 根据用户名/手机号/邮箱, 检查用户是否存在
     int selectUserCountByContent(RegisterReqDto reqDto);
 

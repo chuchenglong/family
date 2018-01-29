@@ -4,10 +4,14 @@ import com.alibaba.fastjson.JSONObject;
 import com.mc.family.config.ConstantComm;
 import com.mc.family.config.ManagerLog;
 import com.mc.family.config.ManagerResult;
+import com.mc.family.vo.BaseVo;
+import com.mc.family.vo.PageVo;
+import com.mc.family.vo.SelectVo;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,16 +32,44 @@ import java.util.Map;
  * @since v0.1
  */
 public class BaseController {
-    /**
-     * @description 通过request参数为实体对象set值
-     * @param request servlet请求参数
-     * @param clazz 实体对象的class类型
-     * @throws java.lang.Exception
-     * @author ChenglongChu
-     * @create 2017/12/14 17:47
-    **/
+
     protected <T> T  input(HttpServletRequest request, Class<T> clazz) throws Exception {
         T t = clazz.newInstance();
+        input(request, clazz, t);
+        while (true) {
+            try {
+                Class sc = clazz.getSuperclass();
+                input(request, sc, t);
+                clazz = sc;
+            } catch (Exception e) {
+                break;
+            }
+        }
+
+//        try {
+//            Class sc = clazz.getSuperclass();
+//            if (sc.newInstance() instanceof PageVo) {
+//                sc.getMethod("setPageSize", int.class).invoke(t, Integer.valueOf(request.getParameter("pageSize")));
+//                Class ssc = clazz.getSuperclass().getSuperclass();
+//                if (ssc.newInstance() instanceof BaseVo && !StringUtils.isEmpty(request.getParameter("userId"))) {
+//                    ssc.getMethod("setUserId", Integer.class).invoke(t, Integer.valueOf(request.getParameter("userId")));
+//                }
+//            } else {
+//                if (sc.newInstance() instanceof BaseVo && !StringUtils.isEmpty(request.getParameter("userId"))) {
+//                    sc.getMethod("setUserId", Integer.class).invoke(t, Integer.valueOf(request.getParameter("userId")));
+//                }
+//            }
+//
+//        } catch (Exception e) {
+//            ManagerLog.warn("this class have no super class");
+//        }
+
+        return t;
+    }
+
+    protected <T> T  input(HttpServletRequest request, T t) throws Exception {
+        Class clazz = t.getClass();
+        // 获取class属性
         Field[] fields = clazz.getDeclaredFields();
         for (Field field : fields) {
             try {
@@ -111,6 +143,89 @@ public class BaseController {
         }
 
         return t;
+    }
+
+    /**
+     * @description 通过request参数为实体对象set值
+     * @param request servlet请求参数
+     * @param clazz 实体对象的class类型
+     * @param t 实体对象
+     * @throws java.lang.Exception
+     * @author ChenglongChu
+     * @create 2017/12/14 17:47
+    **/
+    protected <T> void input(HttpServletRequest request, Class clazz, T t) throws Exception {
+        // 获取class属性
+        Field[] fields = clazz.getDeclaredFields();
+        for (Field field : fields) {
+            try {
+                String attrName = field.getName();
+
+                Object value = request.getParameter(attrName);
+                if (value == null) {
+                    continue;
+                }
+
+                String getMethodName = ConstantComm.GET + attrName.substring(0, 1).toUpperCase()+ attrName.substring(1);
+                String setMethodName = ConstantComm.SET + attrName.substring(0, 1).toUpperCase()+ attrName.substring(1);
+
+                Method getMethod = clazz.getMethod(getMethodName);
+                Method setMethod = null;
+
+                Type type = getMethod.getGenericReturnType();
+                Class<? extends Object> setClass = null;
+                if (type instanceof ParameterizedType) {
+                    String typeName = type.getTypeName();
+                    setClass = Class.forName(typeName.substring(0, typeName.indexOf("<")));
+                } else {
+                    if (ConstantComm.INT.equals(type.getTypeName())) {
+                        setClass = int.class;
+                    } else if (ConstantComm.DOUBLE.equals(type.getTypeName())) {
+                        setClass = double.class;
+                    } else if (ConstantComm.FLOAT.equals(type.getTypeName())) {
+                        setClass = float.class;
+                    } else if (ConstantComm.BOOLEAN.equals(type.getTypeName())) {
+                        setClass = boolean.class;
+                    } else if (ConstantComm.CHAR.equals(type.getTypeName())) {
+                        setClass = char.class;
+                    } else if (ConstantComm.SHORT.equals(type.getTypeName())) {
+                        setClass = short.class;
+                    } else if (ConstantComm.BYTE.equals(type.getTypeName())) {
+                        setClass = byte.class;
+                    } else if (ConstantComm.LONG.equals(type.getTypeName())) {
+                        setClass = long.class;
+                    } else {
+                        setClass = Class.forName(type.getTypeName());
+                    }
+                }
+
+                setMethod = clazz.getMethod(setMethodName, setClass);
+
+                // 处理引用类型转换问题
+                if (!value.getClass().getTypeName().equals(type.getTypeName()) && value.getClass().getTypeName().equals(ConstantComm.OBJECT_STRING)) {
+                    String tempValue = (String)value;
+                    if (type.getTypeName().equals(ConstantComm.OBJECT_INTEGER) || type.getTypeName().equals(ConstantComm.INT)) {
+                        setMethod.invoke(t, Integer.valueOf(tempValue));
+                    } else if (type.getTypeName().equals(ConstantComm.OBJECT_FLOAT) || type.getTypeName().equals(ConstantComm.FLOAT)) {
+                        setMethod.invoke(t, Float.valueOf(tempValue));
+                    } else if (type.getTypeName().equals(ConstantComm.OBJECT_DOUBLE) || type.getTypeName().equals(ConstantComm.DOUBLE)) {
+                        setMethod.invoke(t, Double.valueOf(tempValue));
+                    } else if (type.getTypeName().equals(ConstantComm.OBJECT_SHORT) || type.getTypeName().equals(ConstantComm.SHORT)) {
+                        setMethod.invoke(t, Short.valueOf(tempValue));
+                    } else if (type.getTypeName().equals(ConstantComm.OBJECT_LONG) || type.getTypeName().equals(ConstantComm.LONG)) {
+                        setMethod.invoke(t, Long.valueOf(tempValue));
+                    } else {
+                        setMethod.invoke(t, value);
+                    }
+                } else {
+                    setMethod.invoke(t, value);
+                }
+
+            } catch (Exception e) {
+                ManagerLog.error(e, "input属性传输错误 : " , e.getMessage());
+                continue;
+            }
+        }
     }
 
     /**

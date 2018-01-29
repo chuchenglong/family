@@ -32,7 +32,7 @@ function submit() {
     params.password = $("#password").val();
 
     // 请求注册用户
-    $mc_x.ajax_post("/register/insert", params, function(result){
+    $mc_x.ajax_post_none("/register/insert", params, function(result){
         if (result.code == MC_RESULT_SUCCESS) {
             Ewin.alert({ message: "注册成功 !" }).on(function () {
                 $mc_w.url("login.html");

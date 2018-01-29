@@ -36,6 +36,12 @@ $mc_t.setTableData = function(tableId, data) {
 
 /**  apply to simple table, no pagination, set data from url */
 $mc_t.init_simple_table_ajax = function(tableId, columns, url, params) {
+    if (params == null || params == undefined) {
+        params = {};
+    }
+    if (params.userId == null || params.userId == undefined) {
+        params.userId = window.parent.document.getElementById("userId").value;
+    }
     $.ajax({
         type: "POST",
         url: url,
@@ -58,6 +64,12 @@ $mc_t.init_simple_table_ajax = function(tableId, columns, url, params) {
 
 /**  apply to common table, no pagination, set data from url */
 $mc_t.init_table_ajax = function(tableId, columns, url, params) {
+    if (params == null || params == undefined) {
+        params = {};
+    }
+    if (params.userId == null || params.userId == undefined) {
+        params.userId = window.parent.document.getElementById("userId").value;
+    }
     $.ajax({
         type: "POST",
         url: url,
@@ -86,12 +98,6 @@ $mc_t.init_page_table = function(tableId, columns, url, params, pageSize, pageLi
     if (undefined == pageSize || null == pageSize) {
         pageSize = 10;
     }
-    if (undefined == params || null == params) {
-        params = {};
-    }
-    params.pageSize = pageSize;
-
-    console.log(params);
 
     $('#' + tableId).bootstrapTable({
         columns: columns,                      // 列表中表头
@@ -107,9 +113,26 @@ $mc_t.init_page_table = function(tableId, columns, url, params, pageSize, pageLi
         minimumCountColumns: 2,         // 最少允许的列数, $3
         url: url,                                      // 请求URL, $4
         method: 'post',                         // 请求方式, $4
-        contentType: "application/json",       // 请求content type, $4
+        contentType:"application/x-www-form-urlencoded; charset=UTF-8",       // 请求content type, $4
         // 传递参数, 这里应该返回一个object, 即形如{param1:val1,param2:val2}, $4
-        queryParams: params,
+        queryParams: function(p) {
+            var temp = {};
+            if (undefined != params && null != params) {
+                temp = params;
+                if (params.userId == null || params.userId == undefined) {
+                    temp.userId = window.parent.document.getElementById("userId").value;
+                }
+            } else {
+                temp.userId = window.parent.document.getElementById("userId").value;
+            }
+
+            temp.limit = p.limit;
+            temp.offset = p.offset;
+            temp.order = p.order;
+            temp.search = p.search;
+            temp.sort = p.sort;
+            return temp;
+        },
         pagination: true,                         // 是否显示分页, $4
         sidePagination: "server",           // 分页方式: client客户端分页, server服务端分页, $4
         pageNumber: 1,                          // 初始化加载第一页, 默认第一页, $4

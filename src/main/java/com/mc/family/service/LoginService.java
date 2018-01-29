@@ -42,9 +42,9 @@ public class LoginService {
             throw new Exception(ConstantTips.NONE_LOGIN_PASSWORD);
         }
         // 通过登录信息获取用户信息, 登录信息可为用户名, 邮箱和手机号
-        int userId = userInfoMapper.selectUserLoginByContent(reqDto);
+        Integer userId = userInfoMapper.selectUserLoginByContent(reqDto);
         // 检查用户是否存在
-        if (userId == 0) {
+        if (null == userId) {
             throw new Exception(ConstantTips.WRONG_USERNAME_OR_PASSWORD);
         }
         return userId;

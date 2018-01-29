@@ -6,13 +6,13 @@
 $(function() {
     var params = {};
     params.userId = $mc_w.getUrlParam("userId");
-    $mc_x.ajax_post("/login/main", params, function(result) {
+    $mc_x.ajax_post_none("/login/main", params, function(result) {
         if (result.code == MC_RESULT_SUCCESS) {
             $("#infoArea").text(result.data.username + "/" + result.data.brief);
             $("#peoplePhoto").attr("src", result.data.photo);
 
             $("#userId").val(params.userId);
-            $("#username").val(result.data.username);
+            $("#nativeUm").val(result.data.username);
         } else {
             Ewin.alert({ message: result.message });
         }

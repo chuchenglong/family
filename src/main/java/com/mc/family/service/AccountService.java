@@ -41,9 +41,9 @@ public class AccountService {
         // 添加生活账户信息
         AccountInfo accountInfo = new AccountInfo();
         BeanUtils.copyProperties(reqDto, accountInfo);
-        accountInfo.setCreator(reqDto.getNativeUm());
+        accountInfo.setCreator(reqDto.getUserId().toString());
         accountInfo.setCreateTime(nowDate);
-        accountInfo.setUpdater(reqDto.getNativeUm());
+        accountInfo.setUpdater(reqDto.getUserId().toString());
         accountInfo.setLastModifyTime(nowDate);
         accountInfoMapper.insert(accountInfo);
 
@@ -54,9 +54,9 @@ public class AccountService {
             passwordInfo.setRelType(ConstantComm.OTHER);
             passwordInfo.setPasswordType(ConstantComm.PASSWORD_TYPE.LOGIN.getKey());
             passwordInfo.setPassword(reqDto.getLoginPassword());
-            passwordInfo.setCreator(reqDto.getNativeUm());
+            passwordInfo.setCreator(reqDto.getUserId().toString());
             passwordInfo.setCreateTime(nowDate);
-            passwordInfo.setUpdater(reqDto.getNativeUm());
+            passwordInfo.setUpdater(reqDto.getUserId().toString());
             passwordInfo.setLastModifyTime(nowDate);
             passwordInfoMapper.insert(passwordInfo);
         }
@@ -68,9 +68,9 @@ public class AccountService {
             passwordInfo.setRelType(ConstantComm.OTHER);
             passwordInfo.setPasswordType(ConstantComm.PASSWORD_TYPE.QUERY.getKey());
             passwordInfo.setPassword(reqDto.getQueryPassword());
-            passwordInfo.setCreator(reqDto.getNativeUm());
+            passwordInfo.setCreator(reqDto.getUserId().toString());
             passwordInfo.setCreateTime(nowDate);
-            passwordInfo.setUpdater(reqDto.getNativeUm());
+            passwordInfo.setUpdater(reqDto.getUserId().toString());
             passwordInfo.setLastModifyTime(nowDate);
             passwordInfoMapper.insert(passwordInfo);
         }
@@ -82,9 +82,9 @@ public class AccountService {
             passwordInfo.setRelType(ConstantComm.OTHER);
             passwordInfo.setPasswordType(ConstantComm.PASSWORD_TYPE.DEAL.getKey());
             passwordInfo.setPassword(reqDto.getDealPassword());
-            passwordInfo.setCreator(reqDto.getNativeUm());
+            passwordInfo.setCreator(reqDto.getUserId().toString());
             passwordInfo.setCreateTime(nowDate);
-            passwordInfo.setUpdater(reqDto.getNativeUm());
+            passwordInfo.setUpdater(reqDto.getUserId().toString());
             passwordInfo.setLastModifyTime(nowDate);
             passwordInfoMapper.insert(passwordInfo);
         }

@@ -1,6 +1,7 @@
 package com.mc.family.dto;
 
 import com.mc.family.vo.BaseVo;
+import com.mc.family.vo.PageVo;
 
 /**
  * @author ChenglongChu
@@ -11,11 +12,7 @@ import com.mc.family.vo.BaseVo;
  * @create 2018/01/25 14:47
  * @since v0.4
  */
-public class AccountReqDto extends BaseVo {
-    private Integer userId;
-
-    private String nativeUm;
-
+public class AccountReqDto extends PageVo {
     private String username;
 
     private String phone;
@@ -39,22 +36,6 @@ public class AccountReqDto extends BaseVo {
     private String queryPassword;
 
     private String dealPassword;
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
-    public String getNativeUm() {
-        return nativeUm;
-    }
-
-    public void setNativeUm(String nativeUm) {
-        this.nativeUm = nativeUm;
-    }
 
     public String getUsername() {
         return username;

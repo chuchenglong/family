@@ -1,1 +1,0 @@
-var COMPANY_CODE = 'daily_account_company';
