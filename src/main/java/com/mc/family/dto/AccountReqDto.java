@@ -1,18 +1,17 @@
 package com.mc.family.dto;
 
 import com.mc.family.vo.BaseVo;
-import com.mc.family.vo.PageVo;
 
 /**
  * @author ChenglongChu
- * @description 日常账户管理请求DTO, 便于理解服务接口报文和接收请求输入
+ * @description 日常账户新增/修改请求DTO, 便于理解服务接口报文和接收请求输入
  * 所有DTO要集成BaseVo模型来序列化
  * 涉及的接口服务为:
  * AccountController.addAccount
  * @create 2018/01/25 14:47
  * @since v0.4
  */
-public class AccountReqDto extends PageVo {
+public class AccountReqDto extends BaseVo {
     private String username;
 
     private String phone;

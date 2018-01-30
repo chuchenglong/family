@@ -2,7 +2,6 @@ package com.mc.family.util;
 
 import com.mc.family.config.ManagerLog;
 import sun.misc.BASE64Decoder;
-
 import java.io.UnsupportedEncodingException;
 import java.util.Base64;
 
@@ -20,19 +19,19 @@ public class Base64Utils {
      * @create 2018/1/23 16:44
      **/
     public static String stringToBase64(String str) {
-        byte[] b = null;  
-        String s = null;  
-        try {  
-            b = str.getBytes("utf-8");  
+        try {
+            byte[] b = null;
+            String s = null;
+            b = str.getBytes("utf-8");
+            if (b != null) {
+                s = Base64.getEncoder().encodeToString(b);
+            }
+            return s;
         } catch (UnsupportedEncodingException e) {
             ManagerLog.error(e.toString());
             e.printStackTrace();
             return "";
         }  
-        if (b != null) {  
-            s = Base64.getEncoder().encodeToString(b);
-        }  
-        return s;  
     }
 
     /**
@@ -42,19 +41,25 @@ public class Base64Utils {
      * @create 2018/1/23 16:44
      **/
 	public static String base64ToString(String str) {
-        byte[] b = null;  
-        String result = null;  
-        if (str != null) {
-            BASE64Decoder decoder = new BASE64Decoder();  
-            try {  
-                b = decoder.decodeBuffer(str);
-                result = new String(b, "utf-8");  
-            } catch (Exception e) {
-                ManagerLog.error(e.toString());
-                e.printStackTrace();
-                return "";
-            }  
-        }  
-        return result;  
+        try {
+            byte[] b = null;
+            String result = null;
+            if (str != null) {
+                BASE64Decoder decoder = new BASE64Decoder();
+                try {
+                    b = decoder.decodeBuffer(str);
+                    result = new String(b, "utf-8");
+                } catch (Exception e) {
+                    ManagerLog.error(e.toString());
+                    e.printStackTrace();
+                    return "";
+                }
+            }
+            return result;
+        } catch (Exception e) {
+            ManagerLog.error(e.toString());
+            e.printStackTrace();
+            return "";
+        }
     }
 }

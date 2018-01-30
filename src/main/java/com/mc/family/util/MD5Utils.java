@@ -1,8 +1,6 @@
 package com.mc.family.util;
 
-
 import com.mc.family.config.ManagerLog;
-
 import java.security.MessageDigest;
 
 /**
@@ -19,17 +17,15 @@ public class MD5Utils {
      * @create 2018/1/23 16:44
     **/
     public static String stringToMD5(String str) {
-        StringBuffer hexValue = new StringBuffer();
-        MessageDigest md5 = null;
-
-        try{
+        try {
+            StringBuffer hexValue = new StringBuffer();
+            MessageDigest md5 = null;
             md5 = MessageDigest.getInstance("MD5");
             char[] charArray = str.toCharArray();
             byte[] byteArray = new byte[charArray.length];
             for (int i = 0; i < charArray.length; i++) {
                 byteArray[i] = (byte) charArray[i];
             }
-
             byte[] md5Bytes = md5.digest(byteArray);
             for (int i = 0; i < md5Bytes.length; i++){
                 int val = ((int) md5Bytes[i]) & 0xff;
@@ -38,13 +34,12 @@ public class MD5Utils {
                 }
                 hexValue.append(Integer.toHexString(val));
             }
-        }catch (Exception e) {
+            return hexValue.toString();
+        } catch(Exception e) {
             ManagerLog.error(e.toString());
             e.printStackTrace();
             return "";
         }
-
-        return hexValue.toString();
     }
 
 }

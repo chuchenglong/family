@@ -30,13 +30,19 @@
                             <input id="username" type="text" class="form-control" placeholder="请输入用户名/手机号/邮箱">
                         </div>
                         <div class="condition-label">
+                            <label for="company">所属公司：</label>
+                        </div>
+                        <div class="condition-input">
+                            <select id="company" class="selectpicker show-tick form-control" multiple data-live-search="false"></select>
+                        </div>
+                        <div class="condition-label">
                             <label for="classify">账户分类：</label>
                         </div>
                         <div class="condition-input">
                             <select id="classify" class="selectpicker show-tick form-control" multiple data-live-search="false"></select>
                         </div>
                         <div class="condition-button">
-                            <button id="query" class="btn btn-primary width" onclick="query()">查询</button>
+                            <button id="btn_query" class="btn btn-primary width" onclick="query()">查询</button>
                         </div>
                     </div>
                 </form>
@@ -54,7 +60,7 @@
                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
             </button>
         </div>
-        <table id="tb_departments"></table>
+        <table id="tb_account"></table>
     </div>
 
 </div>

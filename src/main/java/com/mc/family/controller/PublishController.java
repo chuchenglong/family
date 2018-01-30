@@ -22,6 +22,14 @@ public class PublishController extends BaseController {
     @Autowired
     private PublishService publishService;
 
+    /**
+     * @description 根据code查询下拉框数据服务接口
+     * @param request 请求参数
+     * @param response 返回参数
+     * @throws java.lang.Exception
+     * @author ChenglongChu
+     * @create 2018/1/30 18:08
+    **/
     @RequestMapping(value="/data", method = RequestMethod.POST)
     public void querySelectorDatasByParentCode(HttpServletRequest request, HttpServletResponse response) throws Exception {
         SelectVo selectVo = input(request, SelectVo.class);

@@ -117,15 +117,14 @@ $mc_t.init_page_table = function(tableId, columns, url, params, pageSize, pageLi
         // 传递参数, 这里应该返回一个object, 即形如{param1:val1,param2:val2}, $4
         queryParams: function(p) {
             var temp = {};
-            if (undefined != params && null != params) {
+            if (undefined == params || null == params) {
+                temp.userId = window.parent.document.getElementById("userId").value;
+            } else {
                 temp = params;
-                if (params.userId == null || params.userId == undefined) {
+                if (temp.userId == null || temp.userId == undefined) {
                     temp.userId = window.parent.document.getElementById("userId").value;
                 }
-            } else {
-                temp.userId = window.parent.document.getElementById("userId").value;
             }
-
             temp.limit = p.limit;
             temp.offset = p.offset;
             temp.order = p.order;

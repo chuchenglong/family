@@ -14,17 +14,15 @@ import java.util.Map;
  * @since v0.4
  */
 public class CommonUtils {
-    public static final String SERIALIZE_NAME = "serialVersionUID";
-
     /**
      * @description vo转换为HashMap
      * @param t 要转换的vo
      * @author ChenglongChu
      * @create 2018/1/25 15:05
     **/
-    public static <T> Map<String, Object> voToHashMap(T t) throws Exception {
+    public static <T> Map<String, Object> voToHashMap(T t) {
         Map<String, Object> map = new HashMap<>();
-
+        String SERIALIZE_NAME = "serialVersionUID";
         try {
             Class<? extends Object> clazz = t.getClass();
             //获取属性集合
@@ -44,12 +42,11 @@ public class CommonUtils {
                 //通过get方法获取属性值放入map中
                 map.put(attrName, getMethod.invoke(t));
             }
-
         } catch (Exception e) {
-            ManagerLog.error("voToHashMap has some error !!!", e);
-            throw e;
+            ManagerLog.error(e.toString());
+            e.printStackTrace();
+            return null;
         }
-
         return map;
     }
 }

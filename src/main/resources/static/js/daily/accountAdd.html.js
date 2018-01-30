@@ -4,10 +4,10 @@
  * @create 2018/1/26 17:54
  * */
 $(function () {
-    // 加载所属公司
+    // 初始化所属公司条件选择下拉框
     $mc_s.init_select_ajax("company", "/publish/data", {"code":"daily_account_company"}, "请输入所属公司");
 
-    // 加载产品
+    // 初始化产品条件选择下拉框
     $mc_s.init_select("product", "请输入产品");
     $("#company").change(function() {
         var key = $("#company").val();
@@ -19,8 +19,8 @@ $(function () {
     // 加载生活账户类别
     $mc_s.init_select_ajax("classify", "/publish/data", {"code":"daily_account_classify"}, "请输入生活账户类别");
 
-    //$mc_s.init_select_ajax("product", "/publish/data");
-    //$mc_s.init_select_ajax("refAccountId", "/publish/data");
+    // 加载关联账户
+    $mc_s.init_select_ajax("refAccountId", "/account/listRel");
 });
 
 /**
@@ -52,6 +52,11 @@ function submit() {
 
 }
 
+/**
+ * @Discription 重置生活账户输入信息
+ * @author ChenglongChu
+ * @create 2018/1/30 15:49
+ * */
 function reset() {
     $mc_s.set_select_data("refAccountId", [{"key":"0","value":"aaaaa"},{"key":"1","value":"bbbb"}]);
 }

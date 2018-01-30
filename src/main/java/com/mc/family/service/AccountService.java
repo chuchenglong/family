@@ -1,19 +1,22 @@
 package com.mc.family.service;
 
 import com.mc.family.config.ConstantComm;
+import com.mc.family.dto.AccountQueryReqDto;
+import com.mc.family.dto.AccountQueryResDto;
 import com.mc.family.dto.AccountReqDto;
 import com.mc.family.mapper.AccountInfoMapper;
 import com.mc.family.mapper.PasswordInfoMapper;
 import com.mc.family.model.AccountInfo;
 import com.mc.family.model.PasswordInfo;
+import com.mc.family.vo.BaseVo;
 import com.mc.family.vo.PageVo;
+import com.mc.family.vo.SelectVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author ChenglongChu
@@ -90,9 +93,17 @@ public class AccountService {
         }
     }
 
-    public PageVo queryAccountListPageByUserId(AccountReqDto reqDto) throws Exception {
+    /**
+     * @description 根据用户ID分页查询生活账户信息
+     * @param reqDto 查询条件
+     * @return PageVo 查询结果
+     * @throws java.lang.Exception
+     * @author ChenglongChu
+     * @create 2018/1/30 18:27
+    **/
+    public PageVo queryAccountListPageByUserId(AccountQueryReqDto reqDto) throws Exception {
         // 查询条件数据
-        List<AccountInfo> list =  accountInfoMapper.selectAccountListPageByUserId(reqDto);
+        List<AccountQueryResDto> list =  accountInfoMapper.selectAccountListPageByUserId(reqDto);
         // 查询条件总数
         int total = accountInfoMapper.selectAccountListPageCountByUserId(reqDto);
         // 将结果数据放入分页模型
@@ -102,5 +113,25 @@ public class AccountService {
         return pageVo;
     }
 
-
+    /**
+     * @description 查询用户下关联账户列表信息
+     * @param reqDto 查询条件
+     * @return SelectVo 查询结果
+     * @throws java.lang.Exception
+     * @author ChenglongChu
+     * @create 2018/1/30 18:29
+    **/
+    public SelectVo queryAccountListRelByUserId(BaseVo reqDto) throws Exception {
+        List<AccountInfo> accountInfos =  accountInfoMapper.selectAccountListRelByUserId(reqDto.getUserId());
+        List<Map<String, String>> selects = new ArrayList<>();
+        for (AccountInfo accountInfo : accountInfos) {
+            Map<String, String> select = new HashMap<>();
+            select.put(ConstantComm.STRING_KEY, accountInfo.getId().toString());
+            select.put(ConstantComm.STRING_VALUE, accountInfo.getUsername());
+            selects.add(select);
+        }
+        SelectVo selectVo = new SelectVo();
+        selectVo.setSelects(selects);
+        return selectVo;
+    }
 }

@@ -1,8 +1,11 @@
 package com.mc.family.controller;
 
+import com.mc.family.dto.AccountQueryReqDto;
 import com.mc.family.dto.AccountReqDto;
 import com.mc.family.service.AccountService;
+import com.mc.family.vo.BaseVo;
 import com.mc.family.vo.PageVo;
+import com.mc.family.vo.SelectVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,13 +57,29 @@ public class AccountController extends BaseController {
     @RequestMapping(value="/listPage", method = RequestMethod.POST)
     public void queryAccountListPageByUserId(HttpServletRequest request, HttpServletResponse response) throws Exception {
         // step1: 处理请求参数, 包括查询条件
-        AccountReqDto reqDto = input(request, AccountReqDto.class);
+        AccountQueryReqDto reqDto = input(request, AccountQueryReqDto.class);
         // step2: 根据用户ID分页查询用户下账户列表
         PageVo pageVo = accountService.queryAccountListPageByUserId(reqDto);
         // step3: 结束, 返回结果
         commOutput(response, pageVo);
     }
 
-
+    /**
+     * @description 关联账户下拉列表查询服务接口
+     * @param request 请求参数
+     * @param response 返回参数
+     * @throws java.lang.Exception
+     * @author ChenglongChu
+     * @create 2018/1/30 15:19
+    **/
+    @RequestMapping(value="/listRel", method = RequestMethod.POST)
+    public void queryRelAccountListByUserId(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        // step1: 处理请求参数, 查询条件userId
+        BaseVo reqDto = input(request, BaseVo.class);
+        // step2: 根据用户ID查询用户下账户列表
+        SelectVo selectVo = accountService.queryAccountListRelByUserId(reqDto);
+        // step3: 结束, 返回结果
+        output(response, selectVo);
+    }
 
 }

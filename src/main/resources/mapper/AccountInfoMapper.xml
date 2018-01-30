@@ -18,6 +18,14 @@
     <result column="updater" property="updater" jdbcType="VARCHAR" />
     <result column="last_modify_time" property="lastModifyTime" jdbcType="TIMESTAMP" />
   </resultMap>
+
+  <resultMap type="com.mc.family.dto.AccountQueryResDto" id="PageResultMap" extends="BaseResultMap">
+    <result column="companyName" property="companyName" jdbcType="VARCHAR" />
+    <result column="productName" property="productName" jdbcType="VARCHAR" />
+    <result column="classifyName" property="classifyName" jdbcType="VARCHAR" />
+  </resultMap>
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_account_info
     where id = #{id,jdbcType=INTEGER}
@@ -67,10 +75,16 @@
     from t_account_info
   </select>
 
-  <select id="selectAccountListPageByUserId" resultMap="BaseResultMap" >
-    select id, user_id, username, phone, email, company, product, classify, alias, description,
-    rel_id, creator, create_time, updater, last_modify_time
-    from t_account_info
+  <select id="selectAccountListPageByUserId" resultMap="PageResultMap" >
+    select t1.id, t1.user_id, t1.username, t1.phone, t1.email, t1.company, t1.product, t1.classify, t1.alias, t1.description,
+    t1.rel_id, t1.creator, t1.create_time, t1.updater, t1.last_modify_time,
+    t2.data_name companyName,
+    t3.data_name productName,
+    t4.data_name classifyName
+    from t_account_info t1
+    left join t_data_info t2 on t2.data_code = t1.company
+    left join t_data_info t3 on t3.data_code = t1.product
+    left join t_data_info t4 on t4.data_code = t1.classify
     where user_id = #{userId}
     order by id desc
     limit #{offset}, #{limit}
@@ -80,6 +94,12 @@
     select count(1) from t_account_info where user_id = #{userId}
   </select>
 
+  <select id="selectAccountListRelByUserId" resultMap="BaseResultMap">
+    select id, user_id, username, phone, email, company, product, classify, alias, description,
+    rel_id, creator, create_time, updater, last_modify_time
+    from t_account_info
+    where user_id = #{userId}
+  </select>
 
 
 </mapper>

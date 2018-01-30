@@ -23,8 +23,15 @@ public class PublishService {
     @Autowired
     private DataInfoMapper dataInfoMapper;
 
-
-    public SelectVo querySelectorDatasByParentCode(String code) {
+    /**
+     * @description 根据code查询下拉框数据
+     * @param code 条件code
+     * @return SelectVo 下拉框结果
+     * @throws java.lang.Exception
+     * @author ChenglongChu
+     * @create 2018/1/30 18:08
+     **/
+    public SelectVo querySelectorDatasByParentCode(String code) throws Exception {
         List<DataInfo> dataInfos = dataInfoMapper.selectDatasByParentCode(code);
         List<Map<String, String>> selects = new ArrayList<>();
         for (DataInfo dataInfo : dataInfos) {

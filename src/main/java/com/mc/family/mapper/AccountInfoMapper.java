@@ -1,7 +1,9 @@
 package com.mc.family.mapper;
 
-import com.mc.family.dto.AccountReqDto;
+import com.mc.family.dto.AccountQueryReqDto;
+import com.mc.family.dto.AccountQueryResDto;
 import com.mc.family.model.AccountInfo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -16,7 +18,9 @@ public interface AccountInfoMapper {
 
     int updateByPrimaryKey(AccountInfo record);
 
-    List<AccountInfo> selectAccountListPageByUserId(AccountReqDto reqDto);
+    List<AccountQueryResDto> selectAccountListPageByUserId(AccountQueryReqDto reqDto);
 
-    int selectAccountListPageCountByUserId(AccountReqDto reqDto);
+    int selectAccountListPageCountByUserId(AccountQueryReqDto reqDto);
+
+    List<AccountInfo> selectAccountListRelByUserId(@Param("userId") Integer userId);
 }

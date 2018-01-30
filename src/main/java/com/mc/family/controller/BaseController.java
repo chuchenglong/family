@@ -4,16 +4,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.mc.family.config.ConstantComm;
 import com.mc.family.config.ManagerLog;
 import com.mc.family.config.ManagerResult;
-import com.mc.family.vo.BaseVo;
-import com.mc.family.vo.PageVo;
-import com.mc.family.vo.SelectVo;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
@@ -32,7 +27,14 @@ import java.util.Map;
  * @since v0.1
  */
 public class BaseController {
-
+    /**
+     * @description 通过request参数为实体对象set值
+     * @param request servlet请求参数
+     * @param clazz 实体对象的class类型
+     * @throws java.lang.Exception
+     * @author ChenglongChu
+     * @create 2018/1/30 18:11
+    **/
     protected <T> T  input(HttpServletRequest request, Class<T> clazz) throws Exception {
         T t = clazz.newInstance();
         input(request, clazz, t);
@@ -45,28 +47,17 @@ public class BaseController {
                 break;
             }
         }
-
-//        try {
-//            Class sc = clazz.getSuperclass();
-//            if (sc.newInstance() instanceof PageVo) {
-//                sc.getMethod("setPageSize", int.class).invoke(t, Integer.valueOf(request.getParameter("pageSize")));
-//                Class ssc = clazz.getSuperclass().getSuperclass();
-//                if (ssc.newInstance() instanceof BaseVo && !StringUtils.isEmpty(request.getParameter("userId"))) {
-//                    ssc.getMethod("setUserId", Integer.class).invoke(t, Integer.valueOf(request.getParameter("userId")));
-//                }
-//            } else {
-//                if (sc.newInstance() instanceof BaseVo && !StringUtils.isEmpty(request.getParameter("userId"))) {
-//                    sc.getMethod("setUserId", Integer.class).invoke(t, Integer.valueOf(request.getParameter("userId")));
-//                }
-//            }
-//
-//        } catch (Exception e) {
-//            ManagerLog.warn("this class have no super class");
-//        }
-
         return t;
     }
 
+    /**
+     * @description 通过request参数为实体对象set值
+     * @param request servlet请求参数
+     * @param t 实体对象
+     * @throws java.lang.Exception
+     * @author ChenglongChu
+     * @create 2018/1/30 18:11
+     **/
     protected <T> T  input(HttpServletRequest request, T t) throws Exception {
         Class clazz = t.getClass();
         // 获取class属性

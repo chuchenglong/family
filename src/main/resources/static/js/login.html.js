@@ -23,7 +23,6 @@ function submit() {
     params.password = $("#password").val();
     $mc_x.ajax_post_none("/login/check", params, function(result){
         if (result.code == MC_RESULT_SUCCESS) {
-            console.log(result.data);
             $mc_w.url("core.html", {"userId":result.data});
         } else {
             Ewin.alert({ message: result.message });

@@ -10,9 +10,7 @@ $(function() {
         if (result.code == MC_RESULT_SUCCESS) {
             $("#infoArea").text(result.data.username + "/" + result.data.brief);
             $("#peoplePhoto").attr("src", result.data.photo);
-
             $("#userId").val(params.userId);
-            $("#nativeUm").val(result.data.username);
         } else {
             Ewin.alert({ message: result.message });
         }

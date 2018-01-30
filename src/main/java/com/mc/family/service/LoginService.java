@@ -24,6 +24,7 @@ public class LoginService {
     /**
      * @description 登录检查
      * @param reqDto 登录的用户信息
+     * @return int 用户ID
      * @throws java.lang.Exception
      * @author ChenglongChu
      * @create 2017/12/14 17:57
@@ -53,6 +54,7 @@ public class LoginService {
     /**
      * @description 获取主页面加载数据
      * @param userId 用户ID
+     * @return LoginResDto 主页个人信息
      * @throws java.lang.Exception
      * @author ChenglongChu
      * @create 2018/1/26 14:23
