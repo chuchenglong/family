@@ -32,8 +32,11 @@ public class PublishController extends BaseController {
     **/
     @RequestMapping(value="/data", method = RequestMethod.POST)
     public void querySelectorDatasByParentCode(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        // step1: 开始, 获取输入参数
         SelectVo selectVo = input(request, SelectVo.class);
+        // step2: 根据父节点code查询数据内容
         selectVo = publishService.querySelectorDatasByParentCode(selectVo.getCode());
+        // step3: 结束, 返回结果
         output(response, selectVo);
     }
 }

@@ -32,12 +32,65 @@ public class AccountService {
     private PasswordInfoMapper passwordInfoMapper;
 
     /**
+     * @description 根据用户ID分页查询生活账户信息
+     * @param reqDto 查询条件
+     * @return PageVo 查询结果
+     * @throws java.lang.Exception
+     * @author ChenglongChu
+     * @create 2018/1/30 18:27
+    **/
+    public PageVo queryAccountListPageByUserId(AccountQueryReqDto reqDto) throws Exception {
+        // 查询条件数据
+        List<AccountQueryResDto> list =  accountInfoMapper.selectAccountListPageByUserId(reqDto);
+        // 查询条件总数
+        int total = accountInfoMapper.selectAccountListPageCountByUserId(reqDto);
+        // 将结果数据放入分页模型
+        PageVo pageVo = new PageVo();
+        pageVo.setTotal(total);
+        pageVo.setRows(list);
+        return pageVo;
+    }
+
+    /**
+     * @description 查询用户下关联账户列表信息
+     * @param reqDto 查询条件
+     * @return SelectVo 查询结果
+     * @throws java.lang.Exception
+     * @author ChenglongChu
+     * @create 2018/1/30 18:29
+    **/
+    public SelectVo queryAccountListRelByUserId(BaseVo reqDto) throws Exception {
+        List<AccountInfo> accountInfos =  accountInfoMapper.selectAccountListRelByUserId(reqDto.getUserId());
+        List<Map<String, String>> selects = new ArrayList<>();
+        for (AccountInfo accountInfo : accountInfos) {
+            Map<String, String> select = new HashMap<>();
+            select.put(ConstantComm.STRING_KEY, accountInfo.getId().toString());
+            select.put(ConstantComm.STRING_VALUE, accountInfo.getUsername());
+            selects.add(select);
+        }
+        SelectVo selectVo = new SelectVo();
+        selectVo.setSelects(selects);
+        return selectVo;
+    }
+
+    /**
+     * @description 根据账户ID查询生活账户信息
+     * @param accountId 账户ID
+     * @throws java.lang.Exception
+     * @author ChenglongChu
+     * @create 2018/1/31 15:02
+     **/
+    public AccountInfo queryAccountSingleByAccountId(int accountId) {
+        return accountInfoMapper.selectByPrimaryKey(accountId);
+    }
+
+    /**
      * @description 新增生活账户
      * @param reqDto 添加的生活账户信息
      * @throws java.lang.Exception
      * @author ChenglongChu
      * @create 2018/1/26 14:52
-    **/
+     **/
     public void addAccount(AccountReqDto reqDto) throws Exception {
         // 保持新建内所有时间是一致的，必须先new时间，再做set
         Date nowDate = new Date();
@@ -91,47 +144,5 @@ public class AccountService {
             passwordInfo.setLastModifyTime(nowDate);
             passwordInfoMapper.insert(passwordInfo);
         }
-    }
-
-    /**
-     * @description 根据用户ID分页查询生活账户信息
-     * @param reqDto 查询条件
-     * @return PageVo 查询结果
-     * @throws java.lang.Exception
-     * @author ChenglongChu
-     * @create 2018/1/30 18:27
-    **/
-    public PageVo queryAccountListPageByUserId(AccountQueryReqDto reqDto) throws Exception {
-        // 查询条件数据
-        List<AccountQueryResDto> list =  accountInfoMapper.selectAccountListPageByUserId(reqDto);
-        // 查询条件总数
-        int total = accountInfoMapper.selectAccountListPageCountByUserId(reqDto);
-        // 将结果数据放入分页模型
-        PageVo pageVo = new PageVo();
-        pageVo.setTotal(total);
-        pageVo.setRows(list);
-        return pageVo;
-    }
-
-    /**
-     * @description 查询用户下关联账户列表信息
-     * @param reqDto 查询条件
-     * @return SelectVo 查询结果
-     * @throws java.lang.Exception
-     * @author ChenglongChu
-     * @create 2018/1/30 18:29
-    **/
-    public SelectVo queryAccountListRelByUserId(BaseVo reqDto) throws Exception {
-        List<AccountInfo> accountInfos =  accountInfoMapper.selectAccountListRelByUserId(reqDto.getUserId());
-        List<Map<String, String>> selects = new ArrayList<>();
-        for (AccountInfo accountInfo : accountInfos) {
-            Map<String, String> select = new HashMap<>();
-            select.put(ConstantComm.STRING_KEY, accountInfo.getId().toString());
-            select.put(ConstantComm.STRING_VALUE, accountInfo.getUsername());
-            selects.add(select);
-        }
-        SelectVo selectVo = new SelectVo();
-        selectVo.setSelects(selects);
-        return selectVo;
     }
 }

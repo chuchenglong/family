@@ -1,5 +1,5 @@
 var columns = [
-    // {checkbox: true},
+    {checkbox: true},
     {field: 'id', title: 'id', visible: false},
     {field: 'companyName', title: '所属公司', width: 100, align: 'center', valign: 'middle'},
     {field: 'productName', title: '公司产品', width: 100, align: 'center', valign: 'middle'},

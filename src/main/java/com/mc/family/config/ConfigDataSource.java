@@ -18,6 +18,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import javax.sql.DataSource;
@@ -49,6 +50,14 @@ public class ConfigDataSource {
     public DataSource createDataSource() {
         // 根据配置文件信息拿到数据源
         return DataSourceBuilder.create().build();
+    }
+
+    @Bean(name="primaryDataSourceTransactionManager")
+    @Primary
+    public DataSourceTransactionManager primaryDataSourceTransactionManager(@Qualifier("primary-datasource") DataSource dataSource){
+        DataSourceTransactionManager dataSourceTransactionManager = new DataSourceTransactionManager();
+        dataSourceTransactionManager.setDataSource(dataSource);
+        return dataSourceTransactionManager;
     }
 
     /**
@@ -111,6 +120,13 @@ public class ConfigDataSource {
     public DataSource createSecendDataSource() {
         // 根据配置文件信息拿到数据源
         return DataSourceBuilder.create().build();
+    }
+
+    @Bean(name="mqDataSourceTransactionManager")
+    public DataSourceTransactionManager mqDataSourceTransactionManager(@Qualifier("sec-datasource") DataSource dataSource){
+        DataSourceTransactionManager dataSourceTransactionManager = new DataSourceTransactionManager();
+        dataSourceTransactionManager.setDataSource(dataSource);
+        return dataSourceTransactionManager;
     }
 
     /**

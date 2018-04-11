@@ -2,6 +2,7 @@ package com.mc.family;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @description 主程序
@@ -9,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @create 2017/12/13 17:49
 **/
 @SpringBootApplication
+@ComponentScan(basePackages = "com.mc.family")
 public class FamilyApplication {
 	/**
 	 * @description 主函数
