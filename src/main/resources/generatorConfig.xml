@@ -4,29 +4,34 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
+    <!--<properties resource="application.properties"/>
+	<classPathEntry location="D:/repository/com/oracle/ojdbc6/11.2.0.1.0/ojdbc6-11.2.0.1.0.jar" />
+	-->
     <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
         <property name="beginningDelimiter" value="`"/>
         <property name="endingDelimiter" value="`"/>
-        <!-- 是否去除自动生成的注释 true：是： false:否 -->
-        <commentGenerator>
-            <property name="suppressAllComments" value="true"/>
-        </commentGenerator>
-        <!--
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://172.16.5.4:3306/chnlms"
-                        userId="chnlms"
-                        password="chnlms_Mar13">
-        </jdbcConnection>
-        -->
+        <property name="javaFileEncoding" value="UTF-8" />
+
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="com.mc.family.config.ConfigQkMapper"/>
+        </plugin>
+
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
                         connectionURL="jdbc:mysql://localhost:3306/monster"
                         userId="root"
                         password="chuchenglong">
         </jdbcConnection>
-
-        <javaTypeResolver>
-            <property name="forceBigDecimals" value="false"/>
-        </javaTypeResolver>
+        <!--<jdbcConnection driverClass="com.mysql.jdbc.Driver"-->
+                        <!--connectionURL="jdbc:mysql://172.16.5.4:3308/mqreport"-->
+                        <!--userId="mqreport"-->
+                        <!--password="mqreport">-->
+        <!--</jdbcConnection>-->
+        
+        <!-- <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+                        connectionURL="jdbc:oracle:thin:@10.18.19.33:1521:dbdev2"
+                        userId="sl_main"
+                        password="sl_main">
+        </jdbcConnection> -->
 
         <javaModelGenerator targetPackage="com.mc.family.model" targetProject="src/main/java"/>
 
@@ -34,24 +39,13 @@
 
         <javaClientGenerator targetPackage="com.mc.family.mapper" targetProject="src/main/java" type="XMLMAPPER"/>
 
-        <table tableName="t_user_info" domainObjectName="UserInfo">
+        <table tableName="t_demo" domainObjectName="Demo">
             <!--% 表示全部表-->
             <!--mysql 配置-->
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
             <!--oracle 配置-->
-            <!--<generatedKey column="id" sqlStatement="select SEQ_{1}.nextval from dual" identity="false" type="pre"/>-->
+           <!--  <generatedKey column="id" sqlStatement="select SEQ_{1}.nextval from dual" identity="false" type="pre"/> -->
         </table>
-
-        <table tableName="t_account_info" domainObjectName="AccountInfo">
-            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-        </table>
-        <table tableName="t_password_info" domainObjectName="PasswordInfo">
-            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-        </table>
-        <table tableName="t_data_info" domainObjectName="DataInfo">
-            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-        </table>
-
 
     </context>
 </generatorConfiguration>
